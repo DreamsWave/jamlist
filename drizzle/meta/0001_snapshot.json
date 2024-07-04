@@ -1,9 +1,88 @@
 {
-  "id": "fb4f73c7-0a22-4e66-a197-291080e3c616",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "85e7fb02-4cc9-4554-98d0-f357ee4c7d20",
+  "prevId": "fb4f73c7-0a22-4e66-a197-291080e3c616",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
+    "public.moods": {
+      "name": "moods",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "title": {
+          "name": "title",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.song_moods": {
+      "name": "song_moods",
+      "schema": "",
+      "columns": {
+        "song_id": {
+          "name": "song_id",
+          "type": "serial",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "mood_id": {
+          "name": "mood_id",
+          "type": "serial",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "song_moods_song_id_songs_id_fk": {
+          "name": "song_moods_song_id_songs_id_fk",
+          "tableFrom": "song_moods",
+          "tableTo": "songs",
+          "columnsFrom": [
+            "song_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "song_moods_mood_id_moods_id_fk": {
+          "name": "song_moods_mood_id_moods_id_fk",
+          "tableFrom": "song_moods",
+          "tableTo": "moods",
+          "columnsFrom": [
+            "mood_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "song_moods_song_id_mood_id_pk": {
+          "name": "song_moods_song_id_mood_id_pk",
+          "columns": [
+            "song_id",
+            "mood_id"
+          ]
+        }
+      },
+      "uniqueConstraints": {}
+    },
     "public.song_tags": {
       "name": "song_tags",
       "schema": "",
@@ -101,7 +180,7 @@
         },
         "title": {
           "name": "title",
-          "type": "text",
+          "type": "varchar(256)",
           "primaryKey": false,
           "notNull": true
         }
