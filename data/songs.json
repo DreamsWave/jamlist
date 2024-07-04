@@ -1,0 +1,26 @@
+[
+  {
+    "songId": "song_1",
+    "title": "Song 1",
+    "artistId": "artist_1",
+    "price": 50,
+    "genreIds": [
+      "genre_1",
+      "genre_2"
+    ],
+    "moodIds": [
+      "mood_1",
+      "mood_2"
+    ],
+    "isOriginal": "false",
+    "isCopyright": "false",
+    "tagIds": [
+      "tag_1",
+      "tag_2"
+    ],
+    "timesPlayed": 5,
+    "likes": 6,
+    "createdAt": "2023-05-25T10:00:00Z",
+    "lastPlayedAt": "2023-05-25T10:00:00Z"
+  }
+]
