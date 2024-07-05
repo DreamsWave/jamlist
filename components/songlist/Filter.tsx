@@ -1,7 +1,7 @@
 "use client";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useState } from "react";
 import {
   Tooltip,
   TooltipTrigger,
@@ -20,7 +20,6 @@ export const FilterItem = ({
   onSelectionChange,
 }: FilterItemProps) => {
   const [isSelected, setIsSelected] = useState(false);
-  const [shouldShowTooltip, setShouldShowTooltip] = useState(true);
   const [showTooltip, setShowTooltip] = useState(false);
 
   const handleClick = useCallback(() => {
@@ -32,16 +31,14 @@ export const FilterItem = ({
   return (
     <Tooltip
       open={showTooltip}
-      onOpenChange={(open) =>
-        shouldShowTooltip ? setShowTooltip(open) : false
-      }
+      onOpenChange={(open) => setShowTooltip(open)}
       key={id}
     >
       <TooltipTrigger>
         <Badge
           className={cn(
-            "h-6 cursor-pointer hover:bg-slate-300/20 max-w-16",
-            isSelected && "bg-slate-300 hover:bg-slate-300/80"
+            "h-6 max-w-20 cursor-pointer bg-transparent hover:bg-accent hover:text-accent-foreground",
+            isSelected && "bg-accent text-accent-foreground",
           )}
           variant="outline"
           onClick={handleClick}
@@ -68,17 +65,17 @@ function Filter({ label, items }: FilterProps) {
     (item: FilterItemProps) => {
       if (selectedItems.some((selectedItem) => selectedItem.id === item.id)) {
         setSelectedItems(
-          selectedItems.filter((selectedItem) => selectedItem.id !== item.id)
+          selectedItems.filter((selectedItem) => selectedItem.id !== item.id),
         );
       } else {
         setSelectedItems([...selectedItems, item]);
       }
     },
-    [selectedItems]
+    [selectedItems],
   );
 
   return (
-    <div className="flex gap-2 items-center">
+    <div className="flex items-center gap-2 px-6">
       <h3>{label}:</h3>
       <div className="flex gap-2">
         {items.map(({ id, title }) => (

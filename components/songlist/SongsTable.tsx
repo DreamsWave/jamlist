@@ -1,6 +1,12 @@
 import { db } from "@/data/db";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 
-async function Songlist() {
+export interface SongsTableProps {
+  className?: string;
+}
+
+async function SongsTable({ className }: SongsTableProps) {
   const songs = await db.query.songs.findMany({
     with: {
       tags: {
@@ -21,14 +27,16 @@ async function Songlist() {
   if (!songs) return "Empty";
 
   return (
-    <div>
-      <h1>Songlist</h1>
-      {JSON.stringify(songs)}
-      {songs.map((song) => (
-        <div key={song.id}>{song.title}</div>
-      ))}
-    </div>
+    <Card className={cn(className)}>
+      <CardHeader>Songs Table</CardHeader>
+      <CardContent>
+        {JSON.stringify(songs)}
+        {songs.map((song) => (
+          <div key={song.id}>{song.title}</div>
+        ))}
+      </CardContent>
+    </Card>
   );
 }
 
-export default Songlist;
+export default SongsTable;

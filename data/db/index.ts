@@ -1,16 +1,15 @@
-// import { sql } from "@vercel/postgres";
 import { type PostgresJsDatabase, drizzle } from "drizzle-orm/postgres-js";
-// import { drizzle } from "drizzle-orm/vercel-postgres";
 import * as schema from "./schema";
 import postgres from "postgres";
 
-let db: PostgresJsDatabase<typeof schema> | undefined;
+let db: PostgresJsDatabase<typeof schema>;
 let pg: ReturnType<typeof postgres>;
 
 try {
-  // db = drizzle(sql, { schema });
-  pg = postgres(process.env.DB_URL || "");
+  pg = postgres(process.env.DB_URL || "", { max: 1 });
   db = drizzle(pg, { schema });
+
+  if (!db) throw new Error("Database not initialized");
 } catch (error) {
   if (error instanceof Error) {
     console.error(error.message);
