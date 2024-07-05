@@ -1,5 +1,5 @@
 import { db } from "@/data/db";
-import Filter from "@/components/songlist/Filter";
+import BadgeFilter from "@/features/songlist/filters/BadgeFilter";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { SlidersHorizontal } from "lucide-react";
@@ -39,9 +39,9 @@ async function FiltersSideButton({ className }: FiltersSideButtonProps) {
         </SheetHeader>
         <div className="grid gap-4 py-4">
           <div className="flex flex-col gap-2">
-            <Filter label="Genres" items={genres} />
-            <Filter label="Moods" items={moods} />
-            <Filter label="Tags" items={tags} />
+            <BadgeFilter label="Genres" items={genres} selectedItems={[]} />
+            <BadgeFilter label="Moods" items={moods} selectedItems={[]} />
+            <BadgeFilter label="Tags" items={tags} selectedItems={[]} />
           </div>
         </div>
         <SheetFooter>

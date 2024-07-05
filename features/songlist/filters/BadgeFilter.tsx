@@ -53,25 +53,30 @@ export const FilterItem = ({
   );
 };
 
-export interface FilterProps {
+export interface BadgeFilterProps {
   label: string;
   items: FilterItemProps[];
+  selectedItems: FilterItemProps[];
+  addItem?: (item: FilterItemProps) => void;
+  removeItem?: (item: FilterItemProps) => void;
 }
 
-function Filter({ label, items }: FilterProps) {
-  const [selectedItems, setSelectedItems] = useState<FilterItemProps[]>([]);
-
+const BadgeFilter = ({
+  label,
+  items,
+  selectedItems,
+  addItem,
+  removeItem,
+}: BadgeFilterProps) => {
   const handleItemClick = useCallback(
     (item: FilterItemProps) => {
       if (selectedItems.some((selectedItem) => selectedItem.id === item.id)) {
-        setSelectedItems(
-          selectedItems.filter((selectedItem) => selectedItem.id !== item.id),
-        );
+        if (removeItem) removeItem(item);
       } else {
-        setSelectedItems([...selectedItems, item]);
+        if (addItem) addItem(item);
       }
     },
-    [selectedItems],
+    [addItem, removeItem, selectedItems],
   );
 
   return (
@@ -89,6 +94,6 @@ function Filter({ label, items }: FilterProps) {
       </div>
     </div>
   );
-}
+};
 
-export default Filter;
+export default BadgeFilter;

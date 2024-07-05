@@ -1,7 +1,6 @@
-import AddSongButton from "@/components/songlist/AddSongButton";
-import { Card, CardContent } from "@/components/ui/card";
+import AddSongButton from "@/features/songlist/controls/AddSongButton";
 import { cn } from "@/lib/utils";
-import FiltersSideButton from "./FiltersSideButton";
+import FiltersSideButton from "@/features/songlist/controls/FiltersSideButton";
 
 export interface ControlsProps {
   className?: string;

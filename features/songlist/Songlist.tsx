@@ -2,11 +2,11 @@ import { db } from "@/data/db";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
-export interface SongsTableProps {
+export interface SonglistProps {
   className?: string;
 }
 
-async function SongsTable({ className }: SongsTableProps) {
+async function Songlist({ className }: SonglistProps) {
   const songs = await db.query.songs.findMany({
     with: {
       tags: {
@@ -39,4 +39,4 @@ async function SongsTable({ className }: SongsTableProps) {
   );
 }
 
-export default SongsTable;
+export default Songlist;
