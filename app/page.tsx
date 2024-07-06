@@ -1,14 +1,14 @@
-import Controls from "@/features/songlist/Controls";
-import Filters from "@/features/songlist/Filters";
-import Songlist from "@/features/songlist/Songlist";
+import ControlsBar from "@/features/songlist/controls/controls-bar";
+import FiltersCard from "@/features/songlist/filters/filters-card";
+import SonglistTable from "@/features/songlist/songlist/songlist-table";
 
 export default function Home() {
   return (
-    <main>
-      <section className="grids-col-1 container mt-10 grid gap-4 lg:grid-cols-[minmax(150px,_300px)_1fr]">
-        <Filters className="hidden lg:col-span-1 lg:row-span-2 lg:row-start-2 lg:flex" />
-        <Controls className="lg:col-start-2" />
-        <Songlist className="lg:col-start-2" />
+    <main className="min-h-screen bg-muted/40">
+      <section className="grids-col-1 container grid gap-4 pt-10 lg:grid-cols-[minmax(150px,_300px)_1fr]">
+        <FiltersCard className="hidden lg:col-span-1 lg:row-span-2 lg:row-start-2 lg:flex" />
+        <ControlsBar className="lg:col-start-2" />
+        <SonglistTable className="lg:col-start-2" />
       </section>
     </main>
   );

@@ -1,7 +1,7 @@
 "use client";
 
-import { useSonglistStore } from "@/features/songlist/store";
-import Filter from "@/features/songlist/filters/BadgeFilter";
+import { useFiltersStore } from "@/features/songlist/filters/filters-store";
+import Filter from "@/features/songlist/filters/filter-components/badge-filter";
 import type { Tag } from "@/data/db/schema";
 
 interface FilterTagsProps {
@@ -9,9 +9,7 @@ interface FilterTagsProps {
 }
 
 const FilterTags = ({ tags }: FilterTagsProps) => {
-  const { selectedTags, addTag, removeTag } = useSonglistStore(
-    (store) => store.selectedFilters,
-  );
+  const { selectedTags, addTag, removeTag } = useFiltersStore((store) => store);
   return (
     <Filter
       label="Tags"

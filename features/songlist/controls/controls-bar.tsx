@@ -1,6 +1,6 @@
-import AddSongButton from "@/features/songlist/controls/AddSongButton";
+import AddSongButton from "@/features/songlist/controls/add-song-button";
 import { cn } from "@/lib/utils";
-import FiltersSideButton from "@/features/songlist/controls/FiltersSideButton";
+import OpenFiltersSideSheetButton from "@/features/songlist/filters/open-filters-side-sheet-button";
 
 export interface ControlsProps {
   className?: string;
@@ -9,7 +9,7 @@ export interface ControlsProps {
 function Controls({ className }: ControlsProps) {
   return (
     <div className={cn("flex w-full", className)}>
-      <FiltersSideButton className="flex lg:hidden" />
+      <OpenFiltersSideSheetButton className="flex lg:hidden" />
       <AddSongButton className="ml-auto" />
     </div>
   );

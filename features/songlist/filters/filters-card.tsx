@@ -2,15 +2,15 @@ import { db } from "@/data/db";
 import { cn } from "@/lib/utils";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import FilterGenres from "@/features/songlist/filters/FilterGenres";
-import FilterMoods from "@/features/songlist/filters/FilterMoods";
-import FilterTags from "@/features/songlist/filters/FilterTags";
+import FilterGenres from "@/features/songlist/filters/filter-components/filter-genres";
+import FilterMoods from "@/features/songlist/filters/filter-components/filter-moods";
+import FilterTags from "@/features/songlist/filters/filter-components/filter-tags";
 
-export interface FiltersProps {
+export interface FiltersCardProps {
   className?: string;
 }
 
-async function Filters({ className }: FiltersProps) {
+async function FiltersCard({ className }: FiltersCardProps) {
   const genres = await db.query.genres.findMany();
   const moods = await db.query.moods.findMany();
   const tags = await db.query.tags.findMany();
@@ -30,4 +30,4 @@ async function Filters({ className }: FiltersProps) {
   );
 }
 
-export default Filters;
+export default FiltersCard;

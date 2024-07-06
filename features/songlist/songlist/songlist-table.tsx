@@ -1,12 +1,12 @@
 import { db } from "@/data/db";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { cn } from "@/lib/utils";
+import { columns } from "@/features/songlist/songlist/columns";
+import { DataTable } from "@/features/songlist/songlist/data-table";
 
-export interface SonglistProps {
+export interface SonglistTableProps {
   className?: string;
 }
 
-async function Songlist({ className }: SonglistProps) {
+async function SonglistTable({ className }: SonglistTableProps) {
   const songs = await db.query.songs.findMany({
     with: {
       tags: {
@@ -27,16 +27,10 @@ async function Songlist({ className }: SonglistProps) {
   if (!songs) return "Empty";
 
   return (
-    <Card className={cn(className)}>
-      <CardHeader>Songs Table</CardHeader>
-      <CardContent>
-        {JSON.stringify(songs)}
-        {songs.map((song) => (
-          <div key={song.id}>{song.title}</div>
-        ))}
-      </CardContent>
-    </Card>
+    <div className="bg-background">
+      <DataTable columns={columns} data={songs} />
+    </div>
   );
 }
 
-export default Songlist;
+export default SonglistTable;
