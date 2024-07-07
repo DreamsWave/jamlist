@@ -10,10 +10,10 @@ import {
 import { db } from "@/data/db";
 import BadgeFilter from "@/features/songlist/filters/filter-components/badge-filter";
 
-const FiltersSideSheet = async () => {
-  const genres = await db.query.genres.findMany();
-  const moods = await db.query.moods.findMany();
-  const tags = await db.query.tags.findMany();
+const FiltersSideSheet = () => {
+  // const genres = await db.query.genres.findMany();
+  // const moods = await db.query.moods.findMany();
+  // const tags = await db.query.tags.findMany();
 
   return (
     <SheetContent side="left">
@@ -25,9 +25,9 @@ const FiltersSideSheet = async () => {
       </SheetHeader>
       <div className="grid gap-4 py-4">
         <div className="flex flex-col gap-2">
-          <BadgeFilter label="Genres" items={genres} selectedItems={[]} />
+          {/* <BadgeFilter label="Genres" items={genres} selectedItems={[]} />
           <BadgeFilter label="Moods" items={moods} selectedItems={[]} />
-          <BadgeFilter label="Tags" items={tags} selectedItems={[]} />
+          <BadgeFilter label="Tags" items={tags} selectedItems={[]} /> */}
         </div>
       </div>
       <SheetFooter>

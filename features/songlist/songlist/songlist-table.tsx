@@ -1,5 +1,5 @@
 import type { Song } from "@/data/db/schema";
-import { DataTable } from "@/features/songlist/songlist/data-table";
+import { DataTable } from "@/features/songlist/data-table";
 import { columns } from "@/features/songlist/songlist/columns";
 
 export interface SonglistTableProps {
@@ -11,7 +11,7 @@ async function SonglistTable({ className, songs }: SonglistTableProps) {
   if (!songs) return "Empty";
 
   return (
-    <div className="bg-background">
+    <div>
       <DataTable columns={columns} data={songs} />
     </div>
   );

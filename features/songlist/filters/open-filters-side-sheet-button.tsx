@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { SlidersHorizontal } from "lucide-react";
@@ -8,9 +10,9 @@ export interface OpenFiltersSideSheetButtonProps {
   className?: string;
 }
 
-async function OpenFiltersSideSheetButton({
+const OpenFiltersSideSheetButton = ({
   className,
-}: OpenFiltersSideSheetButtonProps) {
+}: OpenFiltersSideSheetButtonProps) => {
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -21,6 +23,6 @@ async function OpenFiltersSideSheetButton({
       <FiltersSideSheet />
     </Sheet>
   );
-}
+};
 
 export default OpenFiltersSideSheetButton;
