@@ -1,29 +1,13 @@
-import { db } from "@/data/db";
-import { columns } from "@/features/songlist/songlist/columns";
+import type { Song } from "@/data/db/schema";
 import { DataTable } from "@/features/songlist/songlist/data-table";
+import { columns } from "@/features/songlist/songlist/columns";
 
 export interface SonglistTableProps {
   className?: string;
+  songs: Song[];
 }
 
-async function SonglistTable({ className }: SonglistTableProps) {
-  const songs = await db.query.songs.findMany({
-    with: {
-      tags: {
-        columns: { songId: false, tagId: false },
-        with: { tag: { columns: { title: true, id: true } } },
-      },
-      moods: {
-        columns: { songId: false, moodId: false },
-        with: { mood: { columns: { title: true, id: true } } },
-      },
-      genres: {
-        columns: { songId: false, genreId: false },
-        with: { genre: { columns: { title: true, id: true } } },
-      },
-    },
-  });
-
+async function SonglistTable({ className, songs }: SonglistTableProps) {
   if (!songs) return "Empty";
 
   return (

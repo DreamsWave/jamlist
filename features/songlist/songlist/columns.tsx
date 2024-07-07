@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import type { Song } from "@/data/db/schema";
 import type { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
-import Actions from "./actions";
+import DropDownMenuActions from "@/features/songlist/songlist/actions/dropdown-menu-actions";
 
 export const columns: ColumnDef<Song>[] = [
   {
@@ -52,7 +52,7 @@ export const columns: ColumnDef<Song>[] = [
   {
     id: "actions",
     cell: ({ row }) => {
-      return <Actions song={row.original} />;
+      return <DropDownMenuActions song={row.original} />;
     },
   },
 ];

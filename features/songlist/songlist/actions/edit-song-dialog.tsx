@@ -1,43 +1,50 @@
-"use client";
-
+import { Button } from "@/components/ui/button";
+import type * as DialogPrimitive from "@radix-ui/react-dialog";
 import {
   Dialog,
-  DialogTrigger,
   DialogContent,
-  DialogHeader,
-  DialogTitle,
   DialogDescription,
   DialogFooter,
+  DialogHeader,
+  DialogTitle,
   DialogClose,
 } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import type React from "react";
-import { useState, useTransition } from "react";
+import { Loader } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Loader, PlusCircle } from "lucide-react";
 import {
-  Form,
   FormField,
   FormItem,
   FormLabel,
   FormControl,
   FormMessage,
+  Form,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
-import { type CreateSong, insertSongSchema } from "@/data/db/schema";
-import { addSongAction } from "@/server/actions/song";
+import { type CreateSong, insertSongSchema, type Song } from "@/data/db/schema";
+import { getSongAction, updateSongAction } from "@/server/actions/song";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm, type FieldValues, type FieldPath } from "react-hook-form";
+import { useEffect, useTransition } from "react";
+import { type DefaultValues, useForm } from "react-hook-form";
 
-interface AddSongDialogProps extends React.HTMLAttributes<HTMLFormElement> {
+interface EditSongDialogProps
+  extends DialogPrimitive.DialogContentProps,
+    React.HTMLAttributes<HTMLDivElement> {
   className?: string;
+  isOpen: boolean;
+  onOpenChange: (open: boolean) => void;
+  songId: Song["id"];
 }
 
-function AddSongDialog({ className, ...props }: AddSongDialogProps) {
-  const [isOpen, setIsOpen] = useState(false);
-  const { toast } = useToast();
+const EditSongDialog = ({
+  className,
+  isOpen = false,
+  onOpenChange,
+  songId,
+}: EditSongDialogProps) => {
   const [isPending, startTransition] = useTransition();
+  const { toast } = useToast();
+
   const form = useForm<CreateSong>({
     resolver: zodResolver(insertSongSchema),
     defaultValues: {
@@ -46,47 +53,53 @@ function AddSongDialog({ className, ...props }: AddSongDialogProps) {
     },
   });
 
+  useEffect(() => {
+    async function getSong() {
+      try {
+        const song = await getSongAction({ id: songId });
+        form.reset({ ...song } as DefaultValues<Song>);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    if (isOpen) {
+      getSong();
+    }
+  }, [songId, isOpen, form]);
+
   function onSubmit(data: CreateSong) {
     startTransition(async () => {
       try {
-        const addResult = await addSongAction({
+        const updateResult = await updateSongAction({
           ...data,
+          id: songId,
         });
-        if (addResult && addResult.status === "error") {
-          toast({
-            variant: "destructive",
-            title: "Error",
-            description: addResult.message,
-          });
-          return;
-        }
+        toast({
+          variant: "default",
+          title: "Song updated",
+        });
       } catch (err) {
         console.error(err);
       }
     });
     form.reset();
-    setIsOpen(false);
+    onOpenChange(false);
   }
+
   return (
-    <Dialog open={isOpen} onOpenChange={(open) => setIsOpen(open)}>
-      <DialogTrigger asChild>
-        <Button className="gap-1">
-          <PlusCircle className="h-3.5 w-3.5" /> Add song
-        </Button>
-      </DialogTrigger>
+    <Dialog open={isOpen} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Add song</DialogTitle>
+          <DialogTitle>Edit song</DialogTitle>
           <DialogDescription>
-            Fill in the song details and click the `Add` button to create the
-            song.
+            Make changes to the song here. Click save when you are done.
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
             className={cn("space-y-8", className)}
-            {...props}
+            // {...props}
           >
             <FormField
               control={form.control}
@@ -127,7 +140,7 @@ function AddSongDialog({ className, ...props }: AddSongDialogProps) {
                     aria-hidden="true"
                   />
                 )}
-                Add
+                Save
               </Button>
             </DialogFooter>
           </form>
@@ -135,6 +148,6 @@ function AddSongDialog({ className, ...props }: AddSongDialogProps) {
       </DialogContent>
     </Dialog>
   );
-}
+};
 
-export default AddSongDialog;
+export default EditSongDialog;
