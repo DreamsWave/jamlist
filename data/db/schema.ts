@@ -9,6 +9,8 @@ import {
   primaryKey,
   varchar,
 } from "drizzle-orm/pg-core";
+import { createInsertSchema, createSelectSchema } from "drizzle-zod";
+import { z } from "zod";
 
 export const songs = pgTable("songs", {
   id: serial("id").primaryKey(),
@@ -40,7 +42,7 @@ export const songTags = pgTable(
       .notNull()
       .references(() => tags.id),
   },
-  (t) => ({ compoundKey: primaryKey({ columns: [t.songId, t.tagId] }) })
+  (t) => ({ compoundKey: primaryKey({ columns: [t.songId, t.tagId] }) }),
 );
 
 export const songTagsRelations = relations(songTags, ({ one }) => ({
@@ -64,7 +66,7 @@ export const songMoods = pgTable(
       .notNull()
       .references(() => moods.id),
   },
-  (t) => ({ compoundKey: primaryKey({ columns: [t.songId, t.moodId] }) })
+  (t) => ({ compoundKey: primaryKey({ columns: [t.songId, t.moodId] }) }),
 );
 
 export const songMoodsRelations = relations(songMoods, ({ one }) => ({
@@ -88,7 +90,7 @@ export const songGenres = pgTable(
       .notNull()
       .references(() => genres.id),
   },
-  (t) => ({ compoundKey: primaryKey({ columns: [t.songId, t.genreId] }) })
+  (t) => ({ compoundKey: primaryKey({ columns: [t.songId, t.genreId] }) }),
 );
 
 export const songGenreRelations = relations(songGenres, ({ one }) => ({
@@ -128,6 +130,14 @@ export const genres = pgTable("genres", {
 export const genreRelations = relations(genres, ({ many }) => ({
   songs: many(songGenres),
 }));
+
+export const insertSongSchema = createInsertSchema(songs, {
+  title: z.string().min(1, {
+    message: "Must be at least 1 character",
+  }),
+});
+export type CreateSong = z.infer<typeof insertSongSchema>;
+export const selectSongSchema = createSelectSchema(songs);
 
 export type Song = typeof songs.$inferSelect;
 export type NewSong = typeof songs.$inferInsert;
