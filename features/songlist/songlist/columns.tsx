@@ -3,51 +3,68 @@
 import { Button } from "@/components/ui/button";
 import type { Song } from "@/data/db/schema";
 import type { ColumnDef } from "@tanstack/react-table";
+import Moment from "moment";
 import { ArrowUpDown } from "lucide-react";
 import DropDownMenuActions from "@/features/songlist/songlist/actions/dropdown-menu-actions";
+import TableHeadButton from "@/components/TableHeadButton";
 
 export const columns: ColumnDef<Song>[] = [
   {
     accessorKey: "id",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          ID
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
+    header: ({ column }) => (
+      <TableHeadButton column={column}>ID</TableHeadButton>
+    ),
   },
   {
     accessorKey: "title",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Title
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
+    header: ({ column }) => (
+      <TableHeadButton column={column}>Title</TableHeadButton>
+    ),
   },
   {
     accessorKey: "artistId",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Artist ID
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
+    header: ({ column }) => (
+      <TableHeadButton column={column}>Artist</TableHeadButton>
+    ),
+  },
+  {
+    accessorKey: "price",
+    header: ({ column }) => (
+      <TableHeadButton column={column}>Price</TableHeadButton>
+    ),
+  },
+  {
+    accessorKey: "timesPlayed",
+    header: ({ column }) => (
+      <TableHeadButton column={column}>Times Played</TableHeadButton>
+    ),
+  },
+  {
+    accessorKey: "lastPlayedAt",
+    header: ({ column }) => (
+      <TableHeadButton column={column}>Last Played</TableHeadButton>
+    ),
+    accessorFn: (d) => {
+      return d.lastPlayedAt
+        ? Moment(d.lastPlayedAt).local().format("DD/MM/YYYY")
+        : null;
     },
+  },
+  {
+    accessorKey: "createdAt",
+    header: ({ column }) => (
+      <TableHeadButton column={column}>Added At</TableHeadButton>
+    ),
+    accessorFn: (d) => {
+      return Moment(d.createdAt).local().format("DD/MM/YYYY");
+    },
+    sortingFn: "datetime",
+  },
+  {
+    accessorKey: "tags",
+    header: ({ column }) => (
+      <TableHeadButton column={column}>Tags</TableHeadButton>
+    ),
   },
   {
     id: "actions",

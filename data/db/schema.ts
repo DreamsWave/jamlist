@@ -8,6 +8,7 @@ import {
   serial,
   primaryKey,
   varchar,
+  decimal,
 } from "drizzle-orm/pg-core";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 import { z } from "zod";
@@ -16,14 +17,14 @@ export const songs = pgTable("songs", {
   id: serial("id").primaryKey(),
   title: text("title").notNull(),
   artistId: text("artist_id"),
-  // price: text("price"),
-  // isOriginal: boolean("is_original"),
-  // hasCopyright: boolean("has_copyright"),
-  // timesPlayed: integer("times_played"),
+  price: decimal("price", { precision: 5, scale: 0 }).notNull().default("0"),
+  isOriginal: boolean("is_original"),
+  hasCopyright: boolean("has_copyright"),
+  timesPlayed: integer("times_played").default(0),
+  createdAt: timestamp("created_at").defaultNow(),
+  lastPlayedAt: timestamp("last_played_at"),
   // likes: integer("likes"),
-  // createdAt: timestamp("created_at").defaultNow(),
   // updatedAt: timestamp("updated_at").defaultNow(),
-  // lastPlayedAt: timestamp("last_played_at"),
 });
 
 export const songsRelations = relations(songs, ({ many }) => ({

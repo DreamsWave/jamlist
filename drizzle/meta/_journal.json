@@ -5,22 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1720096240938,
-      "tag": "0000_known_tarot",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1720099168223,
-      "tag": "0001_silky_vector",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1720100046163,
-      "tag": "0002_warm_ezekiel_stane",
+      "when": 1720463566631,
+      "tag": "0000_fantastic_gertrude_yorkes",
       "breakpoints": true
     }
   ]

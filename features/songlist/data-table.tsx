@@ -17,6 +17,7 @@ import SongsTable from "@/features/songlist/songs-table";
 import SongsTableFooter from "@/features/songlist/songs-table-footer";
 import SongsTableHeader from "./songs-table-header";
 import { cn } from "@/lib/utils";
+import { Song } from "@/data/db/schema";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -29,7 +30,9 @@ export function DataTable<TData, TValue>({
   data,
   className,
 }: DataTableProps<TData, TValue>) {
-  const [sorting, setSorting] = useState<SortingState>([]);
+  const [sorting, setSorting] = useState<SortingState>([
+    { id: "createdAt", desc: true },
+  ]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const { filterInput, setFilterInput } = useFiltersStore((store) => store);
 
