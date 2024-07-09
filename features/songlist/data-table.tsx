@@ -17,7 +17,6 @@ import SongsTable from "@/features/songlist/songs-table";
 import SongsTableFooter from "@/features/songlist/songs-table-footer";
 import SongsTableHeader from "./songs-table-header";
 import { cn } from "@/lib/utils";
-import { Song } from "@/data/db/schema";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];

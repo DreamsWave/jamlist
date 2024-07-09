@@ -28,7 +28,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { type CreateSong, insertSongSchema } from "@/data/db/schema";
 import { addSongAction } from "@/server/actions/song";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm, type FieldValues, type FieldPath } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 interface AddSongDialogProps extends React.HTMLAttributes<HTMLFormElement> {
   className?: string;

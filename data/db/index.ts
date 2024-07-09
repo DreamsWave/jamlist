@@ -11,6 +11,7 @@ try {
 
   if (!db) throw new Error("Database not initialized");
 } catch (error) {
+  console.log(error);
   if (error instanceof Error) {
     console.error(error.message);
     process.exit(1);

@@ -1,11 +1,9 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import type { Song } from "@/data/db/schema";
 import type { ColumnDef } from "@tanstack/react-table";
 import Moment from "moment";
-import { ArrowUpDown } from "lucide-react";
-import DropDownMenuActions from "@/features/songlist/songlist/actions/dropdown-menu-actions";
+import DropDownMenuActions from "@/features/songlist/actions/dropdown-menu-actions";
 import TableHeadButton from "@/components/TableHeadButton";
 
 export const columns: ColumnDef<Song>[] = [

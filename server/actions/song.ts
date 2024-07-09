@@ -73,6 +73,7 @@ export async function getSongsAction() {
   } catch (err) {
     console.error(err);
     if (err instanceof Error) {
+      console.error(err);
       // Throw an Error object with the original error message
       throw new TypeError(err.message);
     }

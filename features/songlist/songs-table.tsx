@@ -7,7 +7,7 @@ import {
   Table as TableBase,
 } from "@/components/ui/table";
 import { flexRender, type Table as TTable } from "@tanstack/react-table";
-import { columns } from "@/features/songlist/songlist/columns";
+import { columns } from "@/features/songlist/songs-table-columns";
 
 interface SongsTableProps<TData> {
   table: TTable<TData>;

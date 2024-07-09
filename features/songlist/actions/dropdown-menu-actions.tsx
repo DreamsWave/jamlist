@@ -10,8 +10,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { MoreHorizontal, Pencil, Trash } from "lucide-react";
 import { useState } from "react";
-import DeleteSongDialog from "./delete-song-dialog";
-import EditSongDialog from "./edit-song-dialog";
+import DeleteSongDialog from "@/features/songlist/actions/delete-song-dialog";
+import EditSongDialog from "@/features/songlist/actions/edit-song-dialog";
 
 interface DropDownMenuActionsProps {
   song: Song;

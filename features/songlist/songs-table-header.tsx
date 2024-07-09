@@ -1,30 +1,18 @@
 "use client";
 
-import AddSongDialog from "@/features/songlist/controls/add-song-dialog";
+import AddSongDialog from "@/features/songlist/actions/add-song-dialog";
 import { cn } from "@/lib/utils";
 import OpenFiltersSideSheetButton from "@/features/songlist/filters/open-filters-side-sheet-button";
 import DebouncedInput from "@/components/DebouncedInput";
 import { useFiltersStore } from "./filters/filters-store";
 import type { Table } from "@tanstack/react-table";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-
 export interface SongsTableHeaderProps<TData> {
   className?: string;
   table: Table<TData>;
   pageSizeOptions?: number[];
 }
 
-function SongsTableHeader<TData>({
-  className,
-  table,
-  pageSizeOptions = [10, 25, 50, 100],
-}: SongsTableHeaderProps<TData>) {
+function SongsTableHeader<TData>({ className }: SongsTableHeaderProps<TData>) {
   const { filterInput, setFilterInput } = useFiltersStore((store) => store);
 
   return (
