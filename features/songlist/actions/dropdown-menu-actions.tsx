@@ -8,10 +8,11 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
-import { MoreHorizontal, Pencil, Trash } from "lucide-react";
+import { Check, Copy, MoreHorizontal, Pencil, Trash } from "lucide-react";
 import { useState } from "react";
 import DeleteSongDialog from "@/features/songlist/actions/delete-song-dialog";
 import EditSongDialog from "@/features/songlist/actions/edit-song-dialog";
+import { useToast } from "@/components/ui/use-toast";
 
 interface DropDownMenuActionsProps {
   song: Song;
@@ -20,6 +21,17 @@ interface DropDownMenuActionsProps {
 const DropDownMenuActions = ({ song }: DropDownMenuActionsProps) => {
   const [isEditSongDialogOpen, setIsEditSongDialogOpen] = useState(false);
   const [isDeleteSongDialogOpen, setIsDeleteSongDialogOpen] = useState(false);
+  const { toast } = useToast();
+
+  function handleCopy() {
+    const copyText = `${song.artistId} - ${song.title}`;
+    navigator.clipboard.writeText(copyText);
+    toast({
+      title: "Song copied to clipboard",
+      description: copyText,
+      action: <Check />,
+    });
+  }
 
   return (
     <>
@@ -32,10 +44,9 @@ const DropDownMenuActions = ({ song }: DropDownMenuActionsProps) => {
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
-          <DropdownMenuItem
-            onClick={() => navigator.clipboard.writeText(String(song.id))}
-          >
-            Copy payment ID
+          <DropdownMenuItem onClick={handleCopy}>
+            <Copy className="mr-2 h-4 w-4" />
+            Copy song
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem

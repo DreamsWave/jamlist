@@ -30,10 +30,10 @@ CREATE TABLE IF NOT EXISTS "songs" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"title" text NOT NULL,
 	"artist_id" text,
-	"price" numeric(5, 0) DEFAULT '0' NOT NULL,
+	"price" numeric(5, 2) DEFAULT '0' NOT NULL,
 	"is_original" boolean,
 	"has_copyright" boolean,
-	"times_played" integer DEFAULT 0 NOT NULL,
+	"times_played" integer DEFAULT 0,
 	"created_at" timestamp DEFAULT now(),
 	"last_played_at" timestamp
 );

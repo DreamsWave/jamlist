@@ -24,10 +24,22 @@ function SongsTablePagination<TData>({
   table,
   pageSizeOptions = [10, 25, 50, 100],
 }: SongsTablePaginationProps<TData>) {
+  const { pageIndex, pageSize } = table.getState().pagination;
+  const totalRows = table.getFilteredRowModel().rows.length;
+  const totalPages = table.getPageCount() || 1;
+  const currentPage = pageIndex + 1;
+  const isLastPage = pageIndex === totalPages - 1;
+
+  const lastRowNumberOfPage = Math.min(currentPage * pageSize, totalRows);
+  const firstRowNumberOfPage = isLastPage
+    ? (totalPages - 1) * pageSize + 1
+    : lastRowNumberOfPage - pageSize + 1;
+
   return (
     <div className="flex w-full flex-col-reverse items-center justify-between gap-4 overflow-auto p-1 sm:flex-row sm:gap-8">
       <div className="flex-1 whitespace-nowrap text-sm text-muted-foreground">
-        Total songs: {table.getFilteredRowModel().rows.length}
+        Showing {firstRowNumberOfPage}-{lastRowNumberOfPage} of{" "}
+        {table.getFilteredRowModel().rows.length} songs
       </div>
       <div className="flex flex-col-reverse items-center gap-4 sm:flex-row sm:gap-6 lg:gap-8">
         <div className="flex items-center space-x-2">
@@ -54,7 +66,7 @@ function SongsTablePagination<TData>({
         </div>
         <div className="flex items-center justify-center text-sm font-medium">
           Page {table.getState().pagination.pageIndex + 1} of{" "}
-          {table.getPageCount()}
+          {table.getPageCount() === 0 ? 1 : table.getPageCount()}
         </div>
         <div className="flex items-center space-x-2">
           <Button

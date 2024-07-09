@@ -59,7 +59,7 @@ export function DataTable<TData, TValue>({
   });
 
   return (
-    <div className={cn(className)}>
+    <div className={cn("overflow-hidden", className)}>
       <SongsTableHeader table={table} />
       <SongsTable table={table} />
       <SongsTableFooter table={table} />

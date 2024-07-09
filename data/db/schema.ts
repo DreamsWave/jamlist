@@ -17,7 +17,7 @@ export const songs = pgTable("songs", {
   id: serial("id").primaryKey(),
   title: text("title").notNull(),
   artistId: text("artist_id"),
-  price: decimal("price", { precision: 5, scale: 0 }).notNull().default("0"),
+  price: decimal("price", { precision: 5, scale: 2 }).notNull().default("0"),
   isOriginal: boolean("is_original"),
   hasCopyright: boolean("has_copyright"),
   timesPlayed: integer("times_played").default(0),

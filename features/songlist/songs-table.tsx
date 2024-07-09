@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/table";
 import { flexRender, type Table as TTable } from "@tanstack/react-table";
 import { columns } from "@/features/songlist/songs-table-columns";
+import { cn } from "@/lib/utils";
 
 interface SongsTableProps<TData> {
   table: TTable<TData>;
@@ -22,7 +23,18 @@ function SongsTable<TData>({ table }: SongsTableProps<TData>) {
             <TableRow key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
                 return (
-                  <TableHead key={header.id}>
+                  <TableHead
+                    key={header.id}
+                    // style={{
+                    //   minWidth: header.column.columnDef.minSize,
+                    //   width: header.column.columnDef.size,
+                    //   maxWidth: header.column.columnDef.maxSize,
+                    // }}
+                    // style={{
+                    //   minWidth: header.column.columnDef.size,
+                    //   maxWidth: header.column.columnDef.size,
+                    // }}
+                  >
                     {header.isPlaceholder
                       ? null
                       : flexRender(
@@ -43,8 +55,25 @@ function SongsTable<TData>({ table }: SongsTableProps<TData>) {
                 data-state={row.getIsSelected() && "selected"}
               >
                 {row.getVisibleCells().map((cell) => (
-                  <TableCell key={cell.id} className="py-2">
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  <TableCell
+                    key={cell.id}
+                    className="h-14 py-0"
+                    // style={{
+                    //   minWidth: cell.column.columnDef.minSize,
+                    //   width: cell.column.columnDef.size,
+                    //   maxWidth: cell.column.columnDef.maxSize,
+                    // }}
+                    // style={{
+                    //   minWidth: cell.column.columnDef.size,
+                    //   maxWidth: cell.column.columnDef.size,
+                    // }}
+                  >
+                    <span className="line-clamp-3 leading-4">
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext(),
+                      )}
+                    </span>
                   </TableCell>
                 ))}
               </TableRow>
