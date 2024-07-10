@@ -25,15 +25,11 @@ function SongsTable<TData>({ table }: SongsTableProps<TData>) {
                 return (
                   <TableHead
                     key={header.id}
-                    // style={{
-                    //   minWidth: header.column.columnDef.minSize,
-                    //   width: header.column.columnDef.size,
-                    //   maxWidth: header.column.columnDef.maxSize,
-                    // }}
-                    // style={{
-                    //   minWidth: header.column.columnDef.size,
-                    //   maxWidth: header.column.columnDef.size,
-                    // }}
+                    style={{
+                      minWidth: header.column.columnDef.minSize,
+                      width: header.column.columnDef.size,
+                      maxWidth: header.column.columnDef.maxSize,
+                    }}
                   >
                     {header.isPlaceholder
                       ? null
@@ -57,18 +53,14 @@ function SongsTable<TData>({ table }: SongsTableProps<TData>) {
                 {row.getVisibleCells().map((cell) => (
                   <TableCell
                     key={cell.id}
-                    className="h-14 py-0"
-                    // style={{
-                    //   minWidth: cell.column.columnDef.minSize,
-                    //   width: cell.column.columnDef.size,
-                    //   maxWidth: cell.column.columnDef.maxSize,
-                    // }}
-                    // style={{
-                    //   minWidth: cell.column.columnDef.size,
-                    //   maxWidth: cell.column.columnDef.size,
-                    // }}
+                    className={cn("h-14 py-0")}
+                    style={{
+                      minWidth: cell.column.columnDef.minSize,
+                      width: cell.column.columnDef.size,
+                      maxWidth: cell.column.columnDef.maxSize,
+                    }}
                   >
-                    <span className="line-clamp-3 leading-4">
+                    <span className="line-clamp-2 leading-4">
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext(),

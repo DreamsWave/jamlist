@@ -7,26 +7,26 @@ import DropDownMenuActions from "@/features/songlist/actions/dropdown-menu-actio
 import TableHeadButton from "@/components/TableHeadButton";
 import RequestSongDialog from "@/features/songlist/actions/request-song-dialog";
 import { Badge } from "@/components/ui/badge";
+import SongTitleCopy from "./actions/song-title-copy";
 
 export const columns: ColumnDef<Song>[] = [
-  // {
-  //   accessorKey: "id",
-  //   header: ({ column }) => (
-  //     <TableHeadButton column={column}>ID</TableHeadButton>
-  //   ),
-  //   size: 50,
-  // },
   {
-    accessorKey: "artistId",
+    id: "artistTitle",
+    accessorFn: (row) => `${row.artistId} - ${row.title}`,
     header: ({ column }) => (
-      <TableHeadButton column={column}>Artist</TableHeadButton>
+      <TableHeadButton column={column} className="ml-5">
+        Artist - Title
+      </TableHeadButton>
     ),
-  },
-  {
-    accessorKey: "title",
-    header: ({ column }) => (
-      <TableHeadButton column={column}>Title</TableHeadButton>
-    ),
+    cell: ({ row }) => {
+      return (
+        <SongTitleCopy song={row.original}>
+          {row.getValue("artistTitle")}
+        </SongTitleCopy>
+      );
+    },
+    minSize: 285,
+    size: 1000,
   },
   {
     accessorKey: "price",
@@ -38,14 +38,14 @@ export const columns: ColumnDef<Song>[] = [
       const price: Song["price"] = row.getValue("price");
       return price ? <Badge variant="secondary">${price}+</Badge> : null;
     },
-    size: 50,
+    enableGlobalFilter: false,
   },
   {
     accessorKey: "timesPlayed",
     header: ({ column }) => (
       <TableHeadButton column={column}>Played</TableHeadButton>
     ),
-    size: 55,
+    enableGlobalFilter: false,
   },
   {
     accessorKey: "lastPlayedAt",
@@ -57,7 +57,7 @@ export const columns: ColumnDef<Song>[] = [
         ? Moment(d.lastPlayedAt).local().format("DD/MM/YYYY")
         : null;
     },
-    size: 90,
+    enableGlobalFilter: false,
   },
   {
     accessorKey: "createdAt",
@@ -67,20 +67,19 @@ export const columns: ColumnDef<Song>[] = [
     accessorFn: (d) => {
       return Moment(d.createdAt).local().format("DD/MM/YYYY");
     },
-    // sortingFn: "datetime",
     sortingFn: (a, b) => {
       return Moment.utc(a.original.createdAt).diff(
         Moment.utc(b.original.createdAt),
       );
     },
-    size: 90,
+    enableGlobalFilter: false,
   },
   {
     accessorKey: "tags",
     header: ({ column }) => (
       <TableHeadButton column={column}>Tags</TableHeadButton>
     ),
-    size: 100,
+    enableGlobalFilter: false,
   },
   {
     id: "actions",
@@ -92,6 +91,6 @@ export const columns: ColumnDef<Song>[] = [
         </div>
       );
     },
-    size: 50,
+    enableGlobalFilter: false,
   },
 ];

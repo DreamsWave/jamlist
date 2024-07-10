@@ -11,12 +11,13 @@ import {
   getFilteredRowModel,
 } from "@tanstack/react-table";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useFiltersStore } from "./filters/filters-store";
 import SongsTable from "@/features/songlist/songs-table";
 import SongsTableFooter from "@/features/songlist/songs-table-footer";
 import SongsTableHeader from "./songs-table-header";
 import { cn } from "@/lib/utils";
+import { useSongsStore } from "./songs-store";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -34,6 +35,7 @@ export function DataTable<TData, TValue>({
   ]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const { filterInput, setFilterInput } = useFiltersStore((store) => store);
+  const { songsPageSize, setSongsPageSize } = useSongsStore();
 
   const table = useReactTable({
     data,
@@ -48,7 +50,7 @@ export function DataTable<TData, TValue>({
     },
     initialState: {
       pagination: {
-        pageSize: 10,
+        pageSize: songsPageSize,
       },
     },
     getPaginationRowModel: getPaginationRowModel(),
@@ -57,6 +59,16 @@ export function DataTable<TData, TValue>({
     onGlobalFilterChange: setFilterInput,
     globalFilterFn: "auto",
   });
+
+  useEffect(() => {
+    const initialSongsPageSize = JSON.parse(
+      localStorage.getItem("songsPageSize") || "",
+    );
+    if (initialSongsPageSize) {
+      setSongsPageSize(initialSongsPageSize.state.songsPageSize);
+      table.setPageSize(initialSongsPageSize.state.songsPageSize);
+    }
+  }, [setSongsPageSize, table]);
 
   return (
     <div className={cn("overflow-hidden", className)}>

@@ -7,14 +7,19 @@ import { cn } from "@/lib/utils";
 interface TableHeadButtonProps {
   column: Column<Song, unknown>;
   children?: React.ReactNode;
+  className?: string;
 }
 
-const TableHeadButton = ({ column, children }: TableHeadButtonProps) => {
+const TableHeadButton = ({
+  column,
+  children,
+  className,
+}: TableHeadButtonProps) => {
   return (
     <Button
       variant="ghost"
       onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-      className={cn("h-8 p-2 text-xs")}
+      className={cn("h-8 p-2 text-xs", className)}
     >
       {children}
 

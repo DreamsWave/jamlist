@@ -6,6 +6,8 @@ import OpenFiltersSideSheetButton from "@/features/songlist/filters/open-filters
 import DebouncedInput from "@/components/DebouncedInput";
 import { useFiltersStore } from "./filters/filters-store";
 import type { Table } from "@tanstack/react-table";
+import { CircleX } from "lucide-react";
+import { Button } from "@/components/ui/button";
 export interface SongsTableHeaderProps<TData> {
   className?: string;
   table: Table<TData>;
@@ -21,12 +23,24 @@ function SongsTableHeader<TData>({ className }: SongsTableHeaderProps<TData>) {
     >
       <div className="flex gap-2">
         <OpenFiltersSideSheetButton className="flex lg:hidden" />
-        <DebouncedInput
-          placeholder="Search songs..."
-          value={filterInput ?? ""}
-          onChange={(value) => setFilterInput(value)}
-          className="max-w-sm"
-        />
+
+        <div className="relative">
+          <DebouncedInput
+            placeholder="Search songs..."
+            value={filterInput ?? ""}
+            onChange={(value) => setFilterInput(value)}
+            className="max-w-sm"
+          />
+          {filterInput && (
+            <Button
+              className="absolute right-0 top-1/2 -translate-y-1/2"
+              variant="link"
+              onClick={() => setFilterInput("")}
+            >
+              <CircleX className="h-4 w-4" />
+            </Button>
+          )}
+        </div>
       </div>
       <AddSongDialog />
     </div>

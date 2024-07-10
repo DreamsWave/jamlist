@@ -62,4 +62,7 @@
   .container-sm {
     @apply container px-2;
   }
+  .container-xs {
+    @apply container px-1;
+  }
 }

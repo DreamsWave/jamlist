@@ -14,6 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useSongsStore } from "./songs-store";
 
 interface SongsTablePaginationProps<TData> {
   table: Table<TData>;
@@ -31,9 +32,14 @@ function SongsTablePagination<TData>({
   const isLastPage = pageIndex === totalPages - 1;
 
   const lastRowNumberOfPage = Math.min(currentPage * pageSize, totalRows);
-  const firstRowNumberOfPage = isLastPage
-    ? (totalPages - 1) * pageSize + 1
-    : lastRowNumberOfPage - pageSize + 1;
+  const firstRowNumberOfPage =
+    totalRows === 0
+      ? 0
+      : isLastPage
+        ? (totalPages - 1) * pageSize + 1
+        : lastRowNumberOfPage - pageSize + 1;
+
+  const { songsPageSize, setSongsPageSize } = useSongsStore();
 
   return (
     <div className="flex w-full flex-col-reverse items-center justify-between gap-4 overflow-auto p-1 sm:flex-row sm:gap-8">
@@ -47,13 +53,14 @@ function SongsTablePagination<TData>({
             Songs per page
           </p>
           <Select
-            value={`${table.getState().pagination.pageSize}`}
+            value={`${songsPageSize}`}
             onValueChange={(value) => {
               table.setPageSize(Number(value));
+              setSongsPageSize(Number(value));
             }}
           >
             <SelectTrigger className="h-8 w-[4.5rem]">
-              <SelectValue placeholder={table.getState().pagination.pageSize} />
+              <SelectValue placeholder={songsPageSize} />
             </SelectTrigger>
             <SelectContent side="top">
               {pageSizeOptions.map((pageSize) => (
