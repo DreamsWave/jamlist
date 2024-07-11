@@ -3,7 +3,7 @@
 import { Copy } from "lucide-react";
 import TypographyInlineCode from "@/components/TypographyInlineCode";
 import { useToast } from "@/components/ui/use-toast";
-import RequestSongDialog from "@/features/songlist/actions/request-song-dialog";
+import RequestSongDialog from "@/features/songlist/components/request-song-dialog-button";
 import type { Song } from "@/data/db/schema";
 import React from "react";
 

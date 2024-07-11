@@ -3,11 +3,11 @@
 import type { Song } from "@/data/db/schema";
 import type { ColumnDef } from "@tanstack/react-table";
 import Moment from "moment";
-import DropDownMenuActions from "@/features/songlist/actions/dropdown-menu-actions";
+import DropDownMenuActions from "@/features/songlist/components/dropdown-menu-actions";
 import TableHeadButton from "@/components/TableHeadButton";
-import RequestSongDialog from "@/features/songlist/actions/request-song-dialog";
+import RequestSongDialog from "@/features/songlist/components/request-song-dialog-button";
 import { Badge } from "@/components/ui/badge";
-import SongTitleCopy from "./actions/song-title-copy";
+import SongTitleCopy from "../../components/song-title-copy";
 
 export const columns: ColumnDef<Song>[] = [
   {

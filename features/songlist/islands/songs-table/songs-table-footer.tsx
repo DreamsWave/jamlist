@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import type { Table } from "@tanstack/react-table";
-import SongsTablePagination from "@/features/songlist/songs-table-pagination";
+import SongsTablePagination from "@/features/songlist/islands/songs-table/songs-table-pagination";
 
 export interface SongsTableFooterProps<TData> {
   className?: string;

@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { SlidersHorizontal } from "lucide-react";
 import { Sheet, SheetTrigger } from "@/components/ui/sheet";
-import FiltersSideSheet from "@/features/songlist/filters/filters-side-sheet";
+import FiltersSideSheet from "@/features/songlist/islands/filters/filters-side-sheet";
 
 export interface OpenFiltersSideSheetButtonProps {
   className?: string;

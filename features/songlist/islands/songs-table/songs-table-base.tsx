@@ -7,16 +7,17 @@ import {
   Table as TableBase,
 } from "@/components/ui/table";
 import { flexRender, type Table as TTable } from "@tanstack/react-table";
-import { columns } from "@/features/songlist/songs-table-columns";
+import { columns } from "@/features/songlist/islands/songs-table/songs-table-columns";
 import { cn } from "@/lib/utils";
+import { Card } from "@/components/ui/card";
 
-interface SongsTableProps<TData> {
+interface SongsTableBaseProps<TData> {
   table: TTable<TData>;
 }
 
-function SongsTable<TData>({ table }: SongsTableProps<TData>) {
+function SongsTableBase<TData>({ table }: SongsTableBaseProps<TData>) {
   return (
-    <div className="rounded-md border bg-background">
+    <Card>
       <TableBase>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
@@ -79,8 +80,8 @@ function SongsTable<TData>({ table }: SongsTableProps<TData>) {
           )}
         </TableBody>
       </TableBase>
-    </div>
+    </Card>
   );
 }
 
-export default SongsTable;
+export default SongsTableBase;

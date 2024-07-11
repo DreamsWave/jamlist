@@ -1,7 +1,7 @@
 "use client";
 
-import { useFiltersStore } from "@/features/songlist/filters/filters-store";
-import Filter from "@/features/songlist/filters/filter-components/badge-filter";
+import { useFiltersStore } from "@/features/songlist/stores/filters-store";
+import Filter from "@/features/songlist/islands/filters/filter-components/badge-filter";
 import type { Genre } from "@/data/db/schema";
 
 interface FilterGenresProps {

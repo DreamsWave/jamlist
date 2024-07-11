@@ -1,24 +1,20 @@
+import React from "react";
 import { getSongsAction } from "@/server/actions/song";
-import { DataTable } from "@/features/songlist/data-table";
-import { columns } from "@/features/songlist/songs-table-columns";
+import SongsTable from "@/features/songlist/islands/songs-table/songs-table";
+import { columns } from "@/features/songlist/islands/songs-table/songs-table-columns";
 
-async function Songlist({ isLoading = false }: { isLoading?: boolean }) {
-  if (isLoading)
-    return (
-      <section className="grids-col-1 container-xs sm:container-sm grid gap-4 py-10 md:container">
-        {/* <section className="grids-col-1 container grid gap-4 py-10 lg:grid-cols-[minmax(150px,_300px)_1fr]"> */}
-        {/* <FiltersCard className="hidden lg:flex" /> */}
-        <DataTable columns={columns} data={[]} isLoading={isLoading} />
-      </section>
-    );
+interface SonglistProps {
+  isLoading?: boolean;
+}
 
+async function Songlist({ isLoading = false }: SonglistProps) {
   try {
-    const songs = await getSongsAction();
+    const songs = isLoading ? [] : await getSongsAction();
     return (
       <section className="grids-col-1 container-xs sm:container-sm grid gap-4 py-10 md:container">
         {/* <section className="grids-col-1 container grid gap-4 py-10 lg:grid-cols-[minmax(150px,_300px)_1fr]"> */}
         {/* <FiltersCard className="hidden lg:flex" /> */}
-        <DataTable columns={columns} data={songs} isLoading={isLoading} />
+        <SongsTable columns={columns} data={songs} isLoading={isLoading} />
       </section>
     );
   } catch (error) {
@@ -27,7 +23,7 @@ async function Songlist({ isLoading = false }: { isLoading?: boolean }) {
       <section className="grids-col-1 container-xs sm:container-sm grid gap-4 py-10 md:container">
         {/* <section className="grids-col-1 container grid gap-4 py-10 lg:grid-cols-[minmax(150px,_300px)_1fr]"> */}
         {/* <FiltersCard className="hidden lg:flex" /> */}
-        <DataTable columns={columns} data={[]} isLoading={isLoading} />
+        <SongsTable columns={columns} data={[]} isLoading={isLoading} />
       </section>
     );
   }

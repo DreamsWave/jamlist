@@ -14,7 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useSongsStore } from "./songs-store";
+import { useSongsStore } from "../../stores/songs-table-store";
 
 interface SongsTablePaginationProps<TData> {
   table: Table<TData>;

@@ -12,28 +12,28 @@ import {
 } from "@tanstack/react-table";
 
 import { useEffect, useMemo, useState } from "react";
-import { useFiltersStore } from "./filters/filters-store";
-import SongsTable from "@/features/songlist/songs-table";
-import SongsTableFooter from "@/features/songlist/songs-table-footer";
-import SongsTableHeader from "./songs-table-header";
+import { useFiltersStore } from "../../stores/filters-store";
+import SongsTableBase from "@/features/songlist/islands/songs-table/songs-table-base";
+import SongsTableFooter from "@/features/songlist/islands/songs-table/songs-table-footer";
+import SongsTableHeader from "@/features/songlist/islands/songs-table/songs-table-header";
 import { cn } from "@/lib/utils";
-import { useSongsStore } from "./songs-store";
+import { useSongsStore } from "@/features/songlist/stores/songs-table-store";
 import { Skeleton } from "@/components/ui/skeleton";
 import { faker } from "@faker-js/faker";
 
-interface DataTableProps<TData, TValue> {
+interface SongsTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   isLoading?: boolean;
   className?: string;
 }
 
-export function DataTable<TData, TValue>({
+export default function SongsTable<TData, TValue>({
   columns,
   data,
   className,
   isLoading = false,
-}: DataTableProps<TData, TValue>) {
+}: SongsTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([
     { id: "createdAt", desc: true },
   ]);
@@ -107,7 +107,7 @@ export function DataTable<TData, TValue>({
   return (
     <div className={cn("overflow-hidden", className)}>
       <SongsTableHeader table={table} />
-      <SongsTable table={table} />
+      <SongsTableBase table={table} />
       <SongsTableFooter table={table} />
     </div>
   );

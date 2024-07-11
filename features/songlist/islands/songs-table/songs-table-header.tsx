@@ -1,10 +1,10 @@
 "use client";
 
-import AddSongDialog from "@/features/songlist/actions/add-song-dialog";
+import AddSongDialog from "@/features/songlist/components/add-song-dialog-button";
 import { cn } from "@/lib/utils";
-import OpenFiltersSideSheetButton from "@/features/songlist/filters/open-filters-side-sheet-button";
+import OpenFiltersSideSheetButton from "@/features/songlist/islands/filters/open-filters-side-sheet-button";
 import DebouncedInput from "@/components/DebouncedInput";
-import { useFiltersStore } from "./filters/filters-store";
+import { useFiltersStore } from "../../stores/filters-store";
 import type { Table } from "@tanstack/react-table";
 import { CircleX } from "lucide-react";
 import { Button } from "@/components/ui/button";

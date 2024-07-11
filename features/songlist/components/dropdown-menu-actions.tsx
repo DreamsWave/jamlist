@@ -10,8 +10,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Copy, MoreHorizontal, Pencil, Trash } from "lucide-react";
 import { useState } from "react";
-import DeleteSongDialog from "@/features/songlist/actions/delete-song-dialog";
-import EditSongDialog from "@/features/songlist/actions/edit-song-dialog";
+import DeleteSongDialog from "@/features/songlist/components/delete-song-dialog";
+import EditSongDialog from "@/features/songlist/components/edit-song-dialog";
 import { useToast } from "@/components/ui/use-toast";
 import TypographyInlineCode from "@/components/TypographyInlineCode";
 
