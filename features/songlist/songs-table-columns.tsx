@@ -92,5 +92,6 @@ export const columns: ColumnDef<Song>[] = [
       );
     },
     enableGlobalFilter: false,
+    minSize: 130,
   },
 ];

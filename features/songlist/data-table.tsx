@@ -11,17 +11,20 @@ import {
   getFilteredRowModel,
 } from "@tanstack/react-table";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useFiltersStore } from "./filters/filters-store";
 import SongsTable from "@/features/songlist/songs-table";
 import SongsTableFooter from "@/features/songlist/songs-table-footer";
 import SongsTableHeader from "./songs-table-header";
 import { cn } from "@/lib/utils";
 import { useSongsStore } from "./songs-store";
+import { Skeleton } from "@/components/ui/skeleton";
+import { faker } from "@faker-js/faker";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  isLoading?: boolean;
   className?: string;
 }
 
@@ -29,6 +32,7 @@ export function DataTable<TData, TValue>({
   columns,
   data,
   className,
+  isLoading = false,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([
     { id: "createdAt", desc: true },
@@ -37,9 +41,39 @@ export function DataTable<TData, TValue>({
   const { filterInput, setFilterInput } = useFiltersStore((store) => store);
   const { songsPageSize, setSongsPageSize } = useSongsStore();
 
+  // Loading data and columns with skeleton
+  const tableData = useMemo(
+    () => (isLoading ? Array(10).fill({}) : data),
+    [isLoading, data],
+  );
+  const tableColumns = useMemo(
+    () =>
+      isLoading
+        ? columns.map((column) => ({
+            ...column,
+            cell: () => (
+              <Skeleton
+                className={cn("h-4")}
+                style={
+                  column.id === "artistTitle"
+                    ? {
+                        marginLeft: "1.25rem",
+                        maxWidth: faker.helpers.arrayElement([
+                          150, 200, 300, 400,
+                        ]),
+                      }
+                    : {}
+                }
+              />
+            ),
+          }))
+        : columns,
+    [isLoading, columns],
+  );
+
   const table = useReactTable({
-    data,
-    columns,
+    data: tableData,
+    columns: tableColumns,
     getCoreRowModel: getCoreRowModel(),
     onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
