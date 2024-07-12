@@ -1,14 +1,13 @@
 import { type PostgresJsDatabase, drizzle } from "drizzle-orm/postgres-js";
 import * as schema from "./schema";
 import postgres from "postgres";
-import * as dotenv from "dotenv";
-dotenv.config();
+import { env } from "@/env";
 
 let db: PostgresJsDatabase<typeof schema>;
 let pg: ReturnType<typeof postgres>;
 
 try {
-  pg = postgres(process.env.DB_URL || "", { max: 1 });
+  pg = postgres(env.DATABASE_URL, { max: 1 });
   db = drizzle(pg, { schema });
 
   if (!db) throw new Error("Database not initialized");

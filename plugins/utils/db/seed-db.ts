@@ -5,11 +5,6 @@
  */
 
 import { generateSongs } from "@/server/actions/generate";
-import * as dotenv from "dotenv";
-dotenv.config();
-
-if (!("DB_URL" in process.env))
-  throw new Error("DB_URL not found on .env.development");
 
 const SONGS_COUNT = 100;
 

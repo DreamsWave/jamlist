@@ -13,7 +13,7 @@
     "db:drop": "drizzle-kit drop",
     "db:push": "drizzle-kit push",
     "db:start": "docker compose up",
-    "db:seed": "tsx ./plugins/utils/db/seed-db.ts",
+    "db:seed": "dotenvx run -- tsx ./plugins/utils/db/seed-db.ts",
     "prepare": "husky",
     "format": "npx prettier --write \"**/*.{ts,tsx,js,jsx,md,mdx,css,yaml,yml}\"",
     "check": "npx prettier --check \"**/*.{ts,tsx,js,jsx,md,mdx,css,yaml,yml}\""
@@ -33,11 +33,11 @@
     "@radix-ui/react-toggle-group": "^1.1.0",
     "@radix-ui/react-tooltip": "^1.1.2",
     "@radix-ui/themes": "^3.1.1",
+    "@t3-oss/env-nextjs": "^0.10.1",
     "@tanstack/react-table": "^8.19.2",
     "@vercel/postgres": "^0.9.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
-    "dotenv": "^16.4.5",
     "drizzle-orm": "^0.31.2",
     "drizzle-zod": "^0.5.1",
     "lucide-react": "^0.400.0",
@@ -55,6 +55,7 @@
     "zustand": "^4.5.4"
   },
   "devDependencies": {
+    "@dotenvx/dotenvx": "^1.6.2",
     "@faker-js/faker": "^8.4.1",
     "@types/node": "^20",
     "@types/react": "^18",
