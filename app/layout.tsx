@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
-import { cookies } from "next/headers";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/toaster";
 import ResizableLayout from "@/components/resizable-layout";
+import { getDefaultLayout } from "@/server/utils";
+import { Suspense } from "react";
+import { Loader } from "lucide-react";
 
 const fontSans = Inter({
   subsets: ["latin"],
@@ -22,11 +24,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const layout = cookies().get("react-resizable-panels:layout");
-  const collapsed = cookies().get("react-resizable-panels:collapsed");
-
-  const defaultLayout = layout ? JSON.parse(layout.value) : undefined;
-  const defaultCollapsed = collapsed ? JSON.parse(collapsed.value) : undefined;
+  const { defaultLayout, defaultCollapsed } = getDefaultLayout();
 
   return (
     <html lang="en" suppressHydrationWarning={true}>
@@ -40,9 +38,16 @@ export default function RootLayout({
           <ResizableLayout
             defaultLayout={defaultLayout}
             defaultCollapsed={defaultCollapsed}
-            navCollapsedSize={4}
           >
-            {children}
+            <Suspense
+              fallback={
+                <div className="flex min-h-screen w-full items-center justify-center">
+                  <Loader className="h-12 w-12 animate-spin" />
+                </div>
+              }
+            >
+              {children}
+            </Suspense>
           </ResizableLayout>
         </TooltipProvider>
         <Toaster />

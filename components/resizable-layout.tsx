@@ -1,24 +1,8 @@
 "use client";
 
-// import "@radix-ui/themes/styles.css";
 import { cn } from "@/lib/utils";
 import { Separator } from "@/components/ui/separator";
-import {
-  Inbox,
-  Send,
-  ArchiveX,
-  Trash2,
-  Archive,
-  Users2,
-  AlertCircle,
-  MessagesSquare,
-  ShoppingCart,
-  File,
-  Music,
-  House,
-  TableProperties,
-  ListMusic,
-} from "lucide-react";
+import { Users2, Music, House, TableProperties, ListMusic } from "lucide-react";
 import { Nav } from "@/components/Nav";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
@@ -31,29 +15,43 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import Link from "next/link";
 
 interface ResizableLayoutProps {
-  defaultLayout: number[] | undefined;
+  defaultLayout?: number[] | undefined;
   defaultCollapsed?: boolean;
-  navCollapsedSize: number;
-  children: React.ReactNode;
+  navCollapsedSize?: number;
+  children?: React.ReactNode;
 }
 
 export default function ResizableLayout({
-  defaultLayout = [265, 440, 655],
+  defaultLayout = [20, 80],
   defaultCollapsed = false,
-  navCollapsedSize,
+  navCollapsedSize = 4,
   children,
 }: ResizableLayoutProps) {
   const [isCollapsed, setIsCollapsed] = useState(defaultCollapsed);
 
+  const onLayout = (sizes: number[]) => {
+    document.cookie = `react-resizable-panels:layout=${JSON.stringify(sizes)}`;
+  };
+
+  const onCollapse = () => {
+    setIsCollapsed(true);
+    document.cookie = `react-resizable-panels:collapsed=${JSON.stringify(
+      true,
+    )}`;
+  };
+
+  const onExpand = () => {
+    setIsCollapsed(false);
+    document.cookie = `react-resizable-panels:collapsed=${JSON.stringify(
+      false,
+    )}`;
+  };
+
   return (
     <ResizablePanelGroup
       direction="horizontal"
-      onLayout={(sizes: number[]) => {
-        document.cookie = `react-resizable-panels:layout=${JSON.stringify(
-          sizes,
-        )}`;
-      }}
-      className="h-full items-stretch"
+      autoSaveId="persistence"
+      onLayout={onLayout}
     >
       <ResizablePanel
         defaultSize={defaultLayout[0]}
@@ -61,19 +59,19 @@ export default function ResizableLayout({
         collapsible={true}
         minSize={15}
         maxSize={20}
-        onCollapse={() => {
-          const collapsed = !isCollapsed;
-          setIsCollapsed(collapsed);
-          document.cookie = `react-resizable-panels:collapsed=${JSON.stringify(
-            collapsed,
-          )}`;
-        }}
+        onCollapse={onCollapse}
+        onExpand={onExpand}
         className={cn(
           isCollapsed && "min-w-[50px] transition-all duration-300 ease-in-out",
         )}
+        style={{ overflow: "visible" }}
       >
         <div className={cn("flex h-[52px]")}>
-          <Button variant="ghost" asChild className="justify-start">
+          <Button
+            variant="ghost"
+            asChild
+            className={cn("justify-start", isCollapsed && "justify-center")}
+          >
             <Link href="/" className="h-full w-full">
               <Music />
               {!isCollapsed && (
@@ -120,12 +118,14 @@ export default function ResizableLayout({
         />
       </ResizablePanel>
       <ResizableHandle withHandle />
-      <ResizablePanel defaultSize={defaultLayout[1]} minSize={30}>
+      <ResizablePanel defaultSize={defaultLayout[1]} minSize={40}>
         <div className="flex h-[52px] items-center px-4 py-2">
           <h1 className="text-xl font-bold">Inbox</h1>
         </div>
         <Separator />
-        <ScrollArea className="h-screen">{children}</ScrollArea>
+        <div className="min-h-[calc(100vh - 52px)] bg-muted/40">
+          <ScrollArea className="h-screen">{children}</ScrollArea>
+        </div>
       </ResizablePanel>
     </ResizablePanelGroup>
   );
