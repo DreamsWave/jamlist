@@ -4,10 +4,12 @@ import "./globals.css";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/toaster";
-import ResizableLayout from "@/components/resizable-layout";
-import { getDefaultLayout } from "@/server/utils";
-import { Suspense } from "react";
-import { Loader } from "lucide-react";
+import Sidebar from "@/features/layout/sidebar/sidebar";
+import Layout from "@/features/layout/layout";
+// import ResizableLayout from "@/components/resizable-layout";
+// import { getDefaultLayout } from "@/server/utils";
+// import { Suspense } from "react";
+// import { Loader } from "lucide-react";
 
 const fontSans = Inter({
   subsets: ["latin"],
@@ -24,7 +26,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { defaultLayout, defaultCollapsed } = getDefaultLayout();
+  // const { defaultLayout, defaultCollapsed } = getDefaultLayout();
 
   return (
     <html lang="en" suppressHydrationWarning={true}>
@@ -35,20 +37,13 @@ export default function RootLayout({
         )}
       >
         <TooltipProvider>
-          <ResizableLayout
+          {/* <ResizableLayout
             defaultLayout={defaultLayout}
             defaultCollapsed={defaultCollapsed}
           >
-            <Suspense
-              fallback={
-                <div className="flex min-h-screen w-full items-center justify-center">
-                  <Loader className="h-12 w-12 animate-spin" />
-                </div>
-              }
-            >
               {children}
-            </Suspense>
-          </ResizableLayout>
+          </ResizableLayout> */}
+          <Layout>{children}</Layout>
         </TooltipProvider>
         <Toaster />
       </body>
