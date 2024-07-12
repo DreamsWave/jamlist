@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import "@radix-ui/themes/styles.css";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/toaster";
+import ResizableLayout from "@/components/resizable-layout";
 
 const fontSans = Inter({
   subsets: ["latin"],
@@ -21,6 +22,12 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const layout = cookies().get("react-resizable-panels:layout");
+  const collapsed = cookies().get("react-resizable-panels:collapsed");
+
+  const defaultLayout = layout ? JSON.parse(layout.value) : undefined;
+  const defaultCollapsed = collapsed ? JSON.parse(collapsed.value) : undefined;
+
   return (
     <html lang="en" suppressHydrationWarning={true}>
       <body
@@ -29,7 +36,15 @@ export default function RootLayout({
           fontSans.variable,
         )}
       >
-        <TooltipProvider>{children}</TooltipProvider>
+        <TooltipProvider>
+          <ResizableLayout
+            defaultLayout={defaultLayout}
+            defaultCollapsed={defaultCollapsed}
+            navCollapsedSize={4}
+          >
+            {children}
+          </ResizableLayout>
+        </TooltipProvider>
         <Toaster />
       </body>
     </html>
