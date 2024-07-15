@@ -1,3 +1,3 @@
 export default async function QueuePage() {
-  return <main>Queue page</main>;
+  return <div>Queue page</div>;
 }
