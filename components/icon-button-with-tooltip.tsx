@@ -1,15 +1,11 @@
-import { cn } from "@/lib/utils";
-import {
-  Button,
-  type ButtonProps,
-  buttonVariants,
-} from "@/components/ui/button";
+import { Button, type ButtonProps } from "@/components/ui/button";
 import type { LucideIcon } from "lucide-react";
 import {
   Tooltip,
   TooltipTrigger,
   TooltipContent,
 } from "@/components/ui/tooltip";
+import React from "react";
 
 interface IconButtonWithTooltipProps extends ButtonProps {
   Icon: LucideIcon;
@@ -18,33 +14,25 @@ interface IconButtonWithTooltipProps extends ButtonProps {
   side?: "top" | "right" | "bottom" | "left" | undefined;
 }
 
-function IconButtonWithTooltip({
-  Icon,
-  title = "",
-  side = "right",
-  className,
-  ...props
-}: IconButtonWithTooltipProps) {
+const IconButtonWithTooltip = React.forwardRef<
+  HTMLInputElement,
+  IconButtonWithTooltipProps
+>(({ className, Icon, title = "", side = "right", ...props }, ref) => {
+  const innerRef = React.useRef<HTMLButtonElement | null>(null);
+
   return (
     <Tooltip delayDuration={0}>
       <TooltipTrigger asChild>
-        <Button
-          variant="ghost"
-          className={cn(
-            buttonVariants({ variant: "ghost", size: "icon" }),
-            "h-9 w-9 p-0",
-            className,
-          )}
-          {...props}
-        >
+        <Button variant="ghost" size="icon" {...props} ref={innerRef}>
           <Icon className="h-4 w-4" />
+          <span className="sr-only">{title}</span>
         </Button>
       </TooltipTrigger>
-      <TooltipContent side={side} className="flex items-center gap-4">
-        {title}
-      </TooltipContent>
+      <TooltipContent side={side}>{title}</TooltipContent>
     </Tooltip>
   );
-}
+});
+
+IconButtonWithTooltip.displayName = "IconButtonWithTooltip";
 
 export default IconButtonWithTooltip;

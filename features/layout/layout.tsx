@@ -19,9 +19,9 @@ function Layout({ children }: LayoutProps) {
     useStore(useLayoutStore, (store) => store) || {};
 
   return (
-    <div className="flex h-screen flex-col">
+    <div className="flex h-full min-h-screen flex-col">
       <Appbar height={APPBAR_HEIGHT} />
-      <div className="relative flex h-full flex-nowrap overflow-hidden">
+      <div className="relative flex h-full flex-1 flex-nowrap">
         <Sidebar
           isCollapsed={isSidebarCollapsed ?? false}
           onCollapse={closeSidebar ?? (() => {})}

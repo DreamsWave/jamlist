@@ -1,4 +1,3 @@
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
 
 interface ContentProps {
@@ -9,10 +8,11 @@ function Content({ children }: ContentProps) {
   return (
     <main
       className={cn(
-        "relative flex w-full flex-grow bg-muted/60 dark:bg-muted/5",
+        "relative flex w-full flex-grow bg-muted",
+        "h-[calc(100vh_-_50px)]",
       )}
     >
-      <ScrollArea className="w-full">{children}</ScrollArea>
+      {children}
     </main>
   );
 }

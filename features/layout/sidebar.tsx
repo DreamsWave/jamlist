@@ -1,11 +1,8 @@
 import IconButtonWithTooltip from "@/components/icon-button-with-tooltip";
 import { Nav } from "@/components/Nav";
-import { Button, buttonVariants } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 import {
-  Music,
-  House,
   TableProperties,
   ListMusic,
   Users2,
@@ -32,7 +29,7 @@ function Sidebar({
     <div className="hidden lg:flex">
       <div
         className={cn(
-          "h-full flex-shrink-0 overflow-hidden whitespace-nowrap border-r-[1px] border-border bg-muted/90 dark:bg-muted/50",
+          "h-full flex-shrink-0 overflow-hidden whitespace-nowrap border-r-[1px] border-border bg-background",
         )}
         style={{ width: isCollapsed ? minWidth : maxWidth }}
       >
