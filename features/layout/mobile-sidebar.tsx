@@ -14,7 +14,7 @@ function MobileSidebar() {
     <Sheet>
       <SheetTrigger asChild>
         <IconButtonWithTooltip
-          Icon={ArrowRightFromLine}
+          icon={<ArrowRightFromLine className="h-4 w-4" />}
           side="bottom"
           title="Expand"
         />

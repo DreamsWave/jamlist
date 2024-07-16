@@ -3,19 +3,16 @@ import ThemeSwitcher from "@/features/switchers/theme-switcher";
 import { cn } from "@/lib/utils";
 import { Music } from "lucide-react";
 import Link from "next/link";
-import MobileSidebar from "./mobile-sidebar";
+import MobileSidebar from "@/features/layout/mobile-sidebar";
+import { layoutConfig } from "@/config/layout";
 
-interface AppbarProps {
-  height?: number;
-}
-
-function Appbar({ height = 50 }: AppbarProps) {
+function Appbar() {
   return (
     <header
       className={cn(
         "sticky top-0 z-50 w-full border-b-[1px] border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60",
       )}
-      style={{ height }}
+      style={{ height: layoutConfig.appbar.height }}
     >
       <div className="flex h-full w-full justify-start gap-2 px-2 lg:px-0">
         <div className="flex items-center justify-center lg:hidden">
@@ -26,7 +23,7 @@ function Appbar({ height = 50 }: AppbarProps) {
             <Link
               href="/"
               className="group inline-flex h-full w-fit gap-1"
-              style={{ width: height }}
+              style={{ width: layoutConfig.sidebar.minWidth }}
             >
               <Music className="h-6 w-6 stroke-primary transition-all group-hover:animate-pulse group-hover:stroke-slate-700 group-hover:dark:stroke-slate-300" />
               <h1 className={cn("hidden text-lg font-semibold")}>JamList</h1>
