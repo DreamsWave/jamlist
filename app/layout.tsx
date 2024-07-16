@@ -5,7 +5,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/toaster";
 import Layout from "@/features/layout/layout";
-import { ThemeProvider } from "@/features/providers/theme-provider";
+import { ThemeProvider } from "@/providers/theme-provider";
+import StoresProvider from "@/providers/stores-provider";
 
 const fontSans = Inter({
   subsets: ["latin"],
@@ -30,17 +31,19 @@ export default function RootLayout({
           fontSans.variable,
         )}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <TooltipProvider>
-            <Layout>{children}</Layout>
-          </TooltipProvider>
-          <Toaster />
-        </ThemeProvider>
+        <StoresProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <TooltipProvider>
+              <Layout>{children}</Layout>
+            </TooltipProvider>
+            <Toaster />
+          </ThemeProvider>
+        </StoresProvider>
       </body>
     </html>
   );

@@ -9,13 +9,13 @@ import {
   ArrowRightFromLine,
   ArrowLeftFromLine,
 } from "lucide-react";
-import { useLayoutStore } from "@/features/layout/layout-store";
-import useStore from "@/hooks/use-store";
+import { useLayoutStore } from "@/providers/layout-store-provider";
 import { layoutConfig } from "@/config/layout";
 
 function Sidebar() {
-  const { closeSidebar, isSidebarCollapsed, openSidebar } =
-    useStore(useLayoutStore, (store) => store) ?? {};
+  const { closeSidebar, isSidebarCollapsed, openSidebar } = useLayoutStore(
+    (store) => store,
+  );
 
   return (
     <div className="hidden lg:flex">
@@ -40,13 +40,7 @@ function Sidebar() {
             <IconButtonWithTooltip
               icon={<ArrowRightFromLine className="h-4 w-4" />}
               onClick={() =>
-                isSidebarCollapsed
-                  ? openSidebar
-                    ? openSidebar()
-                    : () => {}
-                  : closeSidebar
-                    ? closeSidebar()
-                    : () => {}
+                isSidebarCollapsed ? openSidebar() : closeSidebar()
               }
               title="Expand"
               side="right"
@@ -55,13 +49,7 @@ function Sidebar() {
             <IconButtonWithTooltip
               icon={<ArrowLeftFromLine className="h-4 w-4" />}
               onClick={() =>
-                isSidebarCollapsed
-                  ? openSidebar
-                    ? openSidebar()
-                    : () => {}
-                  : closeSidebar
-                    ? closeSidebar()
-                    : () => {}
+                isSidebarCollapsed ? openSidebar() : closeSidebar()
               }
               title="Collapse"
               side="right"

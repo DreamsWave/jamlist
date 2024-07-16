@@ -1,6 +1,6 @@
 "use client";
 
-import { useFiltersStore } from "@/features/songlist/stores/filters-store";
+import { useSonglistStore } from "@/providers/songlist-store-provider";
 import Filter from "@/features/songlist/islands/filters/filter-components/badge-filter";
 import type { Mood } from "@/data/db/schema";
 
@@ -9,9 +9,9 @@ interface FilterMoodsProps {
 }
 
 const FilterMoods = ({ moods }: FilterMoodsProps) => {
-  const { selectedMoods, addMood, removeMood } = useFiltersStore(
-    (store) => store,
-  );
+  const {
+    filters: { selectedMoods, addMood, removeMood },
+  } = useSonglistStore((store) => store);
   return (
     <Filter
       label="Moods"

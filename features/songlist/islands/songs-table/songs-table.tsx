@@ -12,12 +12,11 @@ import {
 } from "@tanstack/react-table";
 
 import { useEffect, useMemo, useState } from "react";
-import { useFiltersStore } from "../../stores/filters-store";
 import SongsTableBase from "@/features/songlist/islands/songs-table/songs-table-base";
 import SongsTableFooter from "@/features/songlist/islands/songs-table/songs-table-footer";
 import SongsTableHeader from "@/features/songlist/islands/songs-table/songs-table-header";
 import { cn } from "@/lib/utils";
-import { useSongsStore } from "@/features/songlist/stores/songs-table-store";
+import { useSonglistStore } from "@/providers/songlist-store-provider";
 import { Skeleton } from "@/components/ui/skeleton";
 import { faker } from "@faker-js/faker";
 
@@ -38,8 +37,10 @@ export default function SongsTable<TData, TValue>({
     { id: "createdAt", desc: true },
   ]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
-  const { filterInput, setFilterInput } = useFiltersStore((store) => store);
-  const { songsPageSize, setSongsPageSize } = useSongsStore();
+  const { searchInput, setSearchInput } = useSonglistStore((store) => store);
+  const { songsPageSize, setSongsPageSize } = useSonglistStore(
+    (store) => store,
+  );
 
   // Loading data and columns with skeleton
   const tableData = useMemo(
@@ -80,23 +81,23 @@ export default function SongsTable<TData, TValue>({
     state: {
       sorting,
       columnFilters,
-      globalFilter: filterInput,
+      globalFilter: searchInput,
     },
     initialState: {
       pagination: {
-        pageSize: songsPageSize,
+        pageSize: songsPageSize ?? 10,
       },
     },
     getPaginationRowModel: getPaginationRowModel(),
     onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
-    onGlobalFilterChange: setFilterInput,
+    onGlobalFilterChange: setSearchInput,
     globalFilterFn: "auto",
   });
 
   useEffect(() => {
     const initialSongsPageSize = JSON.parse(
-      localStorage.getItem("songsPageSize") || "",
+      localStorage.getItem("songlist") || "",
     );
     if (initialSongsPageSize) {
       setSongsPageSize(initialSongsPageSize.state.songsPageSize);

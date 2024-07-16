@@ -4,10 +4,10 @@ import AddSongDialog from "@/features/songlist/components/add-song-dialog-button
 import { cn } from "@/lib/utils";
 import OpenFiltersSideSheetButton from "@/features/songlist/islands/filters/open-filters-side-sheet-button";
 import DebouncedInput from "@/components/DebouncedInput";
-import { useFiltersStore } from "../../stores/filters-store";
 import type { Table } from "@tanstack/react-table";
 import { CircleX } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useSonglistStore } from "@/providers/songlist-store-provider";
 export interface SongsTableHeaderProps<TData> {
   className?: string;
   table: Table<TData>;
@@ -15,7 +15,7 @@ export interface SongsTableHeaderProps<TData> {
 }
 
 function SongsTableHeader<TData>({ className }: SongsTableHeaderProps<TData>) {
-  const { filterInput, setFilterInput } = useFiltersStore((store) => store);
+  const { searchInput, setSearchInput } = useSonglistStore((store) => store);
 
   return (
     <div
@@ -27,15 +27,15 @@ function SongsTableHeader<TData>({ className }: SongsTableHeaderProps<TData>) {
         <div className="relative">
           <DebouncedInput
             placeholder="Search songs..."
-            value={filterInput ?? ""}
-            onChange={(value) => setFilterInput(value)}
+            value={searchInput}
+            onChange={(value) => setSearchInput(String(value))}
             className="max-w-sm"
           />
-          {filterInput && (
+          {searchInput && (
             <Button
               className="absolute right-0 top-1/2 -translate-y-1/2"
               variant="link"
-              onClick={() => setFilterInput("")}
+              onClick={() => setSearchInput("")}
             >
               <CircleX className="h-4 w-4" />
             </Button>

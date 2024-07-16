@@ -1,6 +1,5 @@
-import useStore from "@/hooks/use-store";
 import { cn } from "@/lib/utils";
-import { useLayoutStore } from "@/features/layout/layout-store";
+import { useLayoutStore } from "@/providers/layout-store-provider";
 import { layoutConfig } from "@/config/layout";
 
 interface ContentProps {
@@ -8,8 +7,7 @@ interface ContentProps {
 }
 
 function Content({ children }: ContentProps) {
-  const { isSidebarCollapsed } =
-    useStore(useLayoutStore, (store) => store) ?? {};
+  const { isSidebarCollapsed } = useLayoutStore((store) => store);
 
   return (
     <main

@@ -14,7 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useSongsStore } from "../../stores/songs-table-store";
+import { useSonglistStore } from "@/providers/songlist-store-provider";
 
 interface SongsTablePaginationProps<TData> {
   table: Table<TData>;
@@ -39,7 +39,9 @@ function SongsTablePagination<TData>({
         ? (totalPages - 1) * pageSize + 1
         : lastRowNumberOfPage - pageSize + 1;
 
-  const { songsPageSize, setSongsPageSize } = useSongsStore();
+  const { songsPageSize, setSongsPageSize } = useSonglistStore(
+    (store) => store,
+  );
 
   return (
     <div className="flex w-full flex-col-reverse items-center justify-between gap-4 overflow-auto p-1 sm:flex-row sm:gap-8">

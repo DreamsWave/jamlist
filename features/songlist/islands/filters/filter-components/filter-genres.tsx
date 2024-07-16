@@ -1,6 +1,6 @@
 "use client";
 
-import { useFiltersStore } from "@/features/songlist/stores/filters-store";
+import { useSonglistStore } from "@/providers/songlist-store-provider";
 import Filter from "@/features/songlist/islands/filters/filter-components/badge-filter";
 import type { Genre } from "@/data/db/schema";
 
@@ -9,9 +9,9 @@ interface FilterGenresProps {
 }
 
 const FilterGenres = ({ genres }: FilterGenresProps) => {
-  const { selectedGenres, addGenre, removeGenre } = useFiltersStore(
-    (store) => store,
-  );
+  const {
+    filters: { selectedGenres, addGenre, removeGenre },
+  } = useSonglistStore((store) => store);
   return (
     <Filter
       label="Genres"

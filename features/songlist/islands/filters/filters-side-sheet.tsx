@@ -7,8 +7,6 @@ import {
   SheetFooter,
   SheetClose,
 } from "@/components/ui/sheet";
-import { db } from "@/data/db";
-import BadgeFilter from "@/features/songlist/islands/filters/filter-components/badge-filter";
 
 const FiltersSideSheet = () => {
   // const genres = await db.query.genres.findMany();
