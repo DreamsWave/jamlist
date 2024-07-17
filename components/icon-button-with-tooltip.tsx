@@ -4,6 +4,7 @@ import {
   TooltipTrigger,
   TooltipContent,
 } from "@/components/ui/tooltip";
+import { cn } from "@/lib/utils";
 import React from "react";
 
 interface IconButtonWithTooltipProps extends ButtonProps {
@@ -29,7 +30,7 @@ const IconButtonWithTooltip = React.forwardRef<
           <Button
             variant="ghost"
             size="icon"
-            className="h-8 w-8"
+            className={cn("h-8 w-8", className)}
             ref={ref}
             {...props}
           >
@@ -37,12 +38,14 @@ const IconButtonWithTooltip = React.forwardRef<
             <span className="sr-only">{title}</span>
           </Button>
         </TooltipTrigger>
-        <TooltipContent side={side} className="flex items-center gap-4">
-          {title}{" "}
-          {label && (
-            <span className="ml-auto text-muted-foreground">{label}</span>
-          )}
-        </TooltipContent>
+        {title && (
+          <TooltipContent side={side} className="flex items-center gap-4">
+            {title}{" "}
+            {label && (
+              <span className="ml-auto text-muted-foreground">{label}</span>
+            )}
+          </TooltipContent>
+        )}
       </Tooltip>
     );
   },

@@ -15,9 +15,10 @@ interface NavProps {
     icon: LucideIcon;
     href: string;
   }[];
+  onLinkClick?: () => void;
 }
 
-export function Nav({ links, isCollapsed }: NavProps) {
+export function Nav({ links, isCollapsed, onLinkClick }: NavProps) {
   const pathname = usePathname();
   return (
     <div
@@ -43,6 +44,7 @@ export function Nav({ links, isCollapsed }: NavProps) {
               // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
               key={index}
               href={link.href ?? "#"}
+              onClick={onLinkClick}
               className={cn(
                 buttonVariants({ variant, size: "sm" }),
                 isActive &&

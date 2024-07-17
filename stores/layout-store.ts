@@ -13,7 +13,7 @@ export type LayoutActions = {
 export type LayoutStore = LayoutState & LayoutActions;
 
 export const defaultInitState: LayoutState = {
-  isSidebarCollapsed: false,
+  isSidebarCollapsed: true,
 };
 
 export const createLayoutStore = (

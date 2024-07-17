@@ -57,12 +57,14 @@ const IconLinkWithTooltip = React.forwardRef<
             <span className="sr-only">{title}</span>
           </Link>
         </TooltipTrigger>
-        <TooltipContent side={side} className="flex items-center gap-4">
-          {title}{" "}
-          {label && (
-            <span className="ml-auto text-muted-foreground">{label}</span>
-          )}
-        </TooltipContent>
+        {title && (
+          <TooltipContent side={side} className="flex items-center gap-4">
+            {title}{" "}
+            {label && (
+              <span className="ml-auto text-muted-foreground">{label}</span>
+            )}
+          </TooltipContent>
+        )}
       </Tooltip>
     );
   },

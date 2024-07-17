@@ -59,12 +59,14 @@ const IconButtonWithTooltipDropdown = React.forwardRef<
               </Button>
             </DropdownMenuTrigger>
           </TooltipTrigger>
-          <TooltipContent side={side} className="flex items-center gap-4">
-            {title}{" "}
-            {label && (
-              <span className="ml-auto text-muted-foreground">{label}</span>
-            )}
-          </TooltipContent>
+          {title && (
+            <TooltipContent side={side} className="flex items-center gap-4">
+              {title}{" "}
+              {label && (
+                <span className="ml-auto text-muted-foreground">{label}</span>
+              )}
+            </TooltipContent>
+          )}
         </Tooltip>
         <DropdownMenuContent side={dropdownSide} align="start" sideOffset={4}>
           {showDropdownTitle && (
