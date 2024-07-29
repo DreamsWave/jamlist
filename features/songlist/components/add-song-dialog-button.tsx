@@ -13,7 +13,7 @@ import {
 import { Button } from "@/components/ui/button";
 import type React from "react";
 import { useState, useTransition } from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/tailwind";
 import { Loader, PlusCircle } from "lucide-react";
 import {
   Form,

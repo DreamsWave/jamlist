@@ -15,7 +15,7 @@ import { useEffect, useMemo, useState } from "react";
 import SongsTableBase from "@/features/songlist/islands/songs-table/songs-table-base";
 import SongsTableFooter from "@/features/songlist/islands/songs-table/songs-table-footer";
 import SongsTableHeader from "@/features/songlist/islands/songs-table/songs-table-header";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/tailwind";
 import { useSonglistStore } from "@/providers/songlist-store-provider";
 import { Skeleton } from "@/components/ui/skeleton";
 import { faker } from "@faker-js/faker";

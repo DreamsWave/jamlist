@@ -10,7 +10,7 @@ import {
   DialogClose,
 } from "@/components/ui/dialog";
 import { Loader } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/tailwind";
 import {
   FormField,
   FormItem,

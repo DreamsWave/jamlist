@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/tailwind";
 import type { Table } from "@tanstack/react-table";
 import SongsTablePagination from "@/features/songlist/islands/songs-table/songs-table-pagination";
 

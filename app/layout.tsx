@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import NextTopLoader from "nextjs-toploader";
 import "./globals.css";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/tailwind";
 import { Toaster } from "@/components/ui/toaster";
 import Layout from "@/features/layout/layout";
 import { ThemeProvider } from "@/providers/theme-provider";
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   description: "JamList is a song list app",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;

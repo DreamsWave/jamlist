@@ -1,5 +1,5 @@
 import { db } from "@/data/db";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/tailwind";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import FilterGenres from "@/features/songlist/islands/filters/filter-components/filter-genres";

@@ -2,7 +2,7 @@ import type { Song } from "@/data/db/schema";
 import type { Column } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
 import { ArrowDown, ArrowUp, ChevronsUpDown } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/tailwind";
 
 interface TableHeadButtonProps {
   column: Column<Song, unknown>;

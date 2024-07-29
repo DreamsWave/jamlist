@@ -1,7 +1,7 @@
 "use client";
 
 import AddSongDialog from "@/features/songlist/components/add-song-dialog-button";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/tailwind";
 import OpenFiltersSideSheetButton from "@/features/songlist/islands/filters/open-filters-side-sheet-button";
 import DebouncedInput from "@/components/DebouncedInput";
 import type { Table } from "@tanstack/react-table";

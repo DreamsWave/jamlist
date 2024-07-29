@@ -1,5 +1,7 @@
+"use client";
+
 import IconButtonWithTooltip from "@/components/icon-button-with-tooltip";
-import { Nav } from "@/components/Nav";
+import { Nav } from "@/components/nav";
 import {
   SheetTrigger,
   SheetContent,
@@ -9,7 +11,7 @@ import {
   SheetDescription,
 } from "@/components/ui/sheet";
 import { layoutConfig } from "@/config/layout";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/tailwind";
 import { Separator } from "@radix-ui/react-separator";
 import { ListMusic, Menu, TableProperties, Users2 } from "lucide-react";
 import { useState } from "react";

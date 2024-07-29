@@ -4,7 +4,7 @@ import {
   TooltipTrigger,
   TooltipContent,
 } from "@/components/ui/tooltip";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/tailwind";
 import React from "react";
 
 interface IconButtonWithTooltipProps extends ButtonProps {

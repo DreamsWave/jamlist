@@ -9,7 +9,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Loader } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/tailwind";
 import type { Song } from "@/data/db/schema";
 import { useTransition } from "react";
 import { useToast } from "@/components/ui/use-toast";

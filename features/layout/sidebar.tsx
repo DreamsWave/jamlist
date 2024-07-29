@@ -1,6 +1,8 @@
-import { Nav } from "@/components/Nav";
+"use client";
+
+import { Nav } from "@/components/nav";
 import { Separator } from "@/components/ui/separator";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/tailwind";
 import { TableProperties, ListMusic, Users2 } from "lucide-react";
 import { useLayoutStore } from "@/providers/layout-store-provider";
 import { layoutConfig } from "@/config/layout";

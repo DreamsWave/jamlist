@@ -14,7 +14,7 @@ import { useToast } from "@/components/ui/use-toast";
 import type { Song } from "@/data/db/schema";
 import TypographyInlineCode from "@/components/TypographyInlineCode";
 import { useState } from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/tailwind";
 import { Separator } from "@/components/ui/separator";
 
 interface RequestSongDialogProps extends React.HTMLAttributes<HTMLDivElement> {

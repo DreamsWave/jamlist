@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/table";
 import { flexRender, type Table as TTable } from "@tanstack/react-table";
 import { columns } from "@/features/songlist/islands/songs-table/songs-table-columns";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/tailwind";
 import { Card } from "@/components/ui/card";
 
 interface SongsTableBaseProps<TData> {
