@@ -2,7 +2,7 @@
 
 import { cn } from "@/utils/tailwind";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-// import useIsSub from "@/hooks/useIsSub";
+import useIsUserSubscriber from "@/hooks/useIsUserSubscriber";
 import { useEffect, useState } from "react";
 import useUser from "@/hooks/useUser";
 import { getDiscordMetadata } from "@/utils/discord";
@@ -17,17 +17,16 @@ function UserAvatar({
   const [isActiveBorder, setIsActiveBorder] = useState<boolean>(false);
   const { user } = useUser();
   const discordMetadata = getDiscordMetadata(user);
-  const isSub = false;
-  // const { isSub } = useIsSub();
+  const { isSubscriber } = useIsUserSubscriber();
 
-  // useEffect(() => {
-  //   setIsActiveBorder(isSub);
-  // }, [isSub]);
+  useEffect(() => {
+    setIsActiveBorder(isSubscriber);
+  }, [isSubscriber]);
 
   return (
     <div
       className={cn(
-        "group relative overflow-hidden rounded-full bg-transparent p-[2px]",
+        "group relative h-[34px] w-[34px] overflow-hidden rounded-full bg-transparent p-[2px]",
       )}
       style={{
         background: isActiveBorder
@@ -35,7 +34,7 @@ function UserAvatar({
           : "transparent",
       }}
     >
-      <Avatar>
+      <Avatar className="h-full w-full">
         <AvatarImage src={discordMetadata?.avatar_url} />
         <AvatarFallback>{initials}</AvatarFallback>
       </Avatar>

@@ -9,14 +9,9 @@ export function getDiscordMetadata(user: User | null | undefined) {
 }
 
 export function hasGuildMemberRole(
-  guildMember?: GuildMember | null | undefined,
-  role?: string,
+  guildMember: GuildMember | null | undefined,
+  role: string,
 ) {
   if (!guildMember) return false;
-  if (!role) {
-    return guildMember?.roles?.includes(
-      String(env.DISCORD_BOOSTY_ROLE_ID) ?? "",
-    );
-  }
-  return guildMember?.roles?.includes(role);
+  return guildMember.roles?.includes(role);
 }

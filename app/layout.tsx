@@ -8,6 +8,7 @@ import { Toaster } from "@/components/ui/toaster";
 import Layout from "@/features/layout/layout";
 import { ThemeProvider } from "@/providers/theme-provider";
 import StoresProvider from "@/providers/stores-provider";
+import ReactQueryProvider from "@/providers/react-query-provider";
 
 const fontSans = Inter({
   subsets: ["latin"],
@@ -41,7 +42,9 @@ export default async function RootLayout({
           >
             <NextTopLoader showSpinner={false} height={2} color="#ffffff" />
             <TooltipProvider>
-              <Layout>{children}</Layout>
+              <ReactQueryProvider>
+                <Layout>{children}</Layout>
+              </ReactQueryProvider>
             </TooltipProvider>
             <Toaster />
           </ThemeProvider>
