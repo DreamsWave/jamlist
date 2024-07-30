@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import NextTopLoader from "nextjs-toploader";
 import "./globals.css";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { cn } from "@/utils/tailwind";
@@ -9,6 +8,7 @@ import Layout from "@/features/layout/layout";
 import { ThemeProvider } from "@/providers/theme-provider";
 import StoresProvider from "@/providers/stores-provider";
 import ReactQueryProvider from "@/providers/react-query-provider";
+import TopLoaderProvider from "@/providers/top-loader-provider";
 
 const fontSans = Inter({
   subsets: ["latin"],
@@ -40,9 +40,9 @@ export default async function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <NextTopLoader showSpinner={false} height={2} color="#ffffff" />
             <TooltipProvider>
               <ReactQueryProvider>
+                <TopLoaderProvider />
                 <Layout>{children}</Layout>
               </ReactQueryProvider>
             </TooltipProvider>

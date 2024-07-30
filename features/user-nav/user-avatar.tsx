@@ -7,13 +7,11 @@ import { useEffect, useState } from "react";
 import useUser from "@/hooks/useUser";
 import { getDiscordMetadata } from "@/utils/discord";
 
-function UserAvatar({
-  initials = "",
-}: {
-  url?: string;
-  activeBorder?: boolean;
+export interface UserAvatarProps {
   initials?: string;
-}) {
+}
+
+function UserAvatar({ initials }: UserAvatarProps) {
   const [isActiveBorder, setIsActiveBorder] = useState<boolean>(false);
   const { user } = useUser();
   const discordMetadata = getDiscordMetadata(user);
@@ -26,7 +24,7 @@ function UserAvatar({
   return (
     <div
       className={cn(
-        "group relative h-[34px] w-[34px] overflow-hidden rounded-full bg-transparent p-[2px]",
+        "group relative h-8 w-8 overflow-hidden rounded-full bg-transparent p-[2px]",
       )}
       style={{
         background: isActiveBorder

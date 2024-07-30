@@ -2,7 +2,7 @@ import ThemeSwitcher from "@/features/switchers/theme-switcher";
 import { cn } from "@/utils/tailwind";
 import MobileSidebar from "@/features/layout/mobile-sidebar";
 import { layoutConfig } from "@/config/layout";
-import AuthButton from "../auth-button/auth-button";
+import AuthButton from "../user-nav/auth-button";
 import SidebarButton from "./sidebar-button";
 
 function Appbar() {
@@ -26,7 +26,6 @@ function Appbar() {
         </div>
 
         <div className="ml-auto flex items-center gap-2 pr-2">
-          <ThemeSwitcher />
           <AuthButton />
         </div>
       </div>
