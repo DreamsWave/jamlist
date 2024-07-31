@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
+import "@/app/globals.css";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { cn } from "@/utils/tailwind";
 import { Toaster } from "@/components/ui/toaster";
@@ -13,6 +13,7 @@ import TopLoaderProvider from "@/providers/top-loader-provider";
 const fontSans = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
+  display: "swap",
 });
 
 export const metadata: Metadata = {

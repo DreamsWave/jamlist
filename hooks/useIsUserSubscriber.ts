@@ -11,6 +11,7 @@ const useIsUserSubscriber = () => {
   const { data: guildMember, isFetching } = useGetGuildMember(
     discordMetadata?.provider_id,
   );
+
   const isSubscriber = hasGuildMemberRole(
     guildMember,
     env.NEXT_PUBLIC_DISCORD_BOOSTY_ROLE_ID,

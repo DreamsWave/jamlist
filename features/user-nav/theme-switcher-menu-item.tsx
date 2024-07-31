@@ -21,7 +21,7 @@ const ThemeSwitcherMenuItem = React.forwardRef<
       </Label>
       <Switch
         id="dark-theme"
-        checked={theme === "dark"}
+        checked={theme === "dark" || theme === "system"}
         onCheckedChange={(checked) =>
           checked ? setTheme("dark") : setTheme("light")
         }

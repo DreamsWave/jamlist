@@ -10,7 +10,7 @@ const botToken = `Bot ${env.DISCORD_BOT_TOKEN}`;
 export async function getGuildMember(
   userId?: string,
 ): Promise<GuildMember | null> {
-  // console.log('discord request')
+  // console.log("discord request");
   if (!userId) return null;
   const url = new URL(`${baseUrl}/guilds/${guildId}/members/${userId}`);
 

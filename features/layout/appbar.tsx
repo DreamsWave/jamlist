@@ -1,4 +1,3 @@
-import ThemeSwitcher from "@/features/switchers/theme-switcher";
 import { cn } from "@/utils/tailwind";
 import MobileSidebar from "@/features/layout/mobile-sidebar";
 import { layoutConfig } from "@/config/layout";

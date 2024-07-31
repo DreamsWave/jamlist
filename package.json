@@ -16,7 +16,9 @@
     "db:seed": "dotenvx run -- tsx ./plugins/utils/db/seed-db.ts",
     "prepare": "husky",
     "format": "npx prettier --write \"**/*.{ts,tsx,js,jsx,md,mdx,css,yaml,yml}\"",
-    "check": "npx prettier --check \"**/*.{ts,tsx,js,jsx,md,mdx,css,yaml,yml}\""
+    "check": "npx prettier --check \"**/*.{ts,tsx,js,jsx,md,mdx,css,yaml,yml}\"",
+    "supa:start": "npx supabase start",
+    "supa:stop": "npx supabase stop"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
